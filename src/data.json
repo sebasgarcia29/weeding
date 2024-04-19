@@ -1,0 +1,38 @@
+{
+  "date": "2024-08-21",
+  "location": "Intiraimi | Salón de Eventos",
+  "gretting": "Saludo",
+  "groom": {
+    "name": "Johana",
+    "account_number": "○○은행 ***-***-******",
+    "parents": {
+      "mother": {
+        "name": "Mireya Traslaviña",
+        "account_number": "+57 300 000 0000"
+      },
+      "father": {
+        "name": "Carlos Garces",
+        "account_number": "+57 300 000 0000"
+      }
+    }
+  },
+  "bride": {
+    "name": "Sebastian",
+    "account_number": "○○은행 ***-***-******",
+    "parents": {
+      "mother": {
+        "name": "Luz Stella Cadavid",
+        "account_number": "+57 300 000 0000"
+      },
+      "father": {
+        "name": "Henry Garcia",
+        "account_number": "+57 300 000 0000"
+      }
+    }
+  },
+  "kakaotalk": {
+    "api_token": "",
+    "wedding_invitation_url": "",
+    "share_image": ""
+  }
+}
