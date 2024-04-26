@@ -18,22 +18,7 @@ Si te gusta este repositorio o planeas utilizarlo, ¡por favor, no olvides darle
 
 ## Cómo Utilizar la Invitación de Boda v1
 
-Por favor, modifica adecuadamente la sección `<Head>` en `./src/pages/index.tsx`.
-
-```html
-<meta content="○○○❤○○○ Invitación de Boda" name="Title" />
-<meta content="○○○○년 ○○월 ○○일 ○요일 오전 ○○시 ○○분" name="Description" />
-<meta content="○○○○년 ○○월 ○○일 ○요일 오전 ○○시 ○○분" name="Keyword" />
-<meta property="og:title" content="○○○❤○○○ Invitación de Boda" />
-<meta
-  property="og:description"
-  content="○○○○년 ○○월 ○○일 ○요일 오전 ○○시 ○○분"
-/>
-<meta property="og:url" content="https://kyuhyuk.kr/wedding-invitation" />
-<meta name="theme-color" content="#BCAAA4" />
-```
-
-`./src/data.json`를 수정하여 사용합니다.
+`./src/data.json`
 
 ```json
 {

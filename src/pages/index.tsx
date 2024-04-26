@@ -1,19 +1,14 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import { Noto_Sans_KR } from "next/font/google";
 import dynamic from "next/dynamic";
 import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
-import Script from "next/script";
 
 const Title = dynamic(() => import("@/components/Title"), { ssr: false });
 const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
 const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
 const Location = dynamic(() => import("@/components/Location"), { ssr: false });
-const CongratulatoryMoney = dynamic(
-  () => import("@/components/CongratulatoryMoney"),
-  { ssr: false }
-);
+const Music = dynamic(() => import("@/components/Music"), { ssr: false });
 const Share = dynamic(() => import("@/components/Share"), { ssr: false });
 
 const notoSansKR = Noto_Sans_KR({
@@ -61,14 +56,16 @@ export default function Home() {
         />
         <meta name="theme-color" content="#BCAAA4" />
         <title>Johana❤Sebastian</title>
+        <link rel="icon" href="./assets/couple.ico" type="image/x-icon" />
       </Head>
       <main className={`${notoSansKR.className}`}>
-        <Script src="https://developers.kakao.com/sdk/js/kakao.min.js"></Script>
+        {/* <Music /> */}
         <Title data={JsonData} />
         <Gretting data={JsonData} />
         <Gallery />
         <Location />
-        <CongratulatoryMoney data={JsonData} />
+
+        {/* <CongratulatoryMoney data={JsonData} /> */}
         <Share data={JsonData} />
         <Footer>Copyright © 2024 Sebasgarcia29</Footer>
       </main>

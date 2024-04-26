@@ -25,7 +25,7 @@ export default function Location() {
   return (
     <Wrapper>
       <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
-        <Title>오시는 길</Title>
+        <Title>Intiraimi | Salón de Eventos</Title>
       </Divider>
       <Image src="./assets/LocationMap.png" />
     </Wrapper>
