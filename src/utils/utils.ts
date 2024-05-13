@@ -28,7 +28,9 @@ END:VCALENDAR`;
 };
 
 export const ConfirmAssistance = (numberWhatsapp: string) => {
-    window.open(numberWhatsapp, "_blank");
+    const message = "Confirmo asistencia!"; // Predefined message
+    const whatsappURL = `https://wa.me/${numberWhatsapp}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
 }
 
 export const sendLocation = (urlLocation: string) => {

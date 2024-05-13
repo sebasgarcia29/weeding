@@ -1,5 +1,6 @@
 type Data = {
-  url_whatsapp: string;
+  url_whatsapp_novia: string;
+  url_whatsapp_novio: string;
   url_location: string;
   date: string;
   location: string;

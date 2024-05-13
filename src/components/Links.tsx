@@ -51,7 +51,7 @@ const Button = styled("button", {
     border: "none",
     cursor: "pointer",
     marginTop: "10px",
-    width: '50%',
+    width: '70%',
 });
 
 const ContainerLink = styled("div", {
@@ -80,9 +80,14 @@ const Links = ({ data }: GrettingProps) => {
             <ContainerLink>
                 <Label>{String('lugar 🏡').toUpperCase()}</Label>
                 <Description>{'Intiraimi | Salón de Eventos'}</Description>
-                <Button onClick={() => {
-                    ConfirmAssistance(data.url_whatsapp)
-                }}>{'Confirmar Asistencia'}</Button>
+                <Button style={{ backgroundColor: '#F9A88B' }}
+                    onClick={() => {
+                        ConfirmAssistance(data.url_whatsapp_novia)
+                    }}>{'Confirmar Asistencia novía 👰🏽‍♀️'}</Button>
+                <Button style={{ backgroundColor: '#98DA6C' }}
+                    onClick={() => {
+                        ConfirmAssistance(data.url_whatsapp_novio)
+                    }}>{'Confirmar Asistencia novío 🤵🏽'}</Button>
             </ContainerLink>
             <ContainerLink>
                 <Label>{String('Dirección 📍').toUpperCase()}</Label>
