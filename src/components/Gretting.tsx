@@ -40,7 +40,7 @@ const ContainerLabels = styled("div", {
 });
 
 const BigLabel = styled("p", {
-  fontSize: "9vh",
+  fontSize: "7.5vh",
   fontFamily: "Playfair Display, serif",
   margin: "0",
   color: "#86604B",
@@ -63,7 +63,10 @@ const ContainerQuote = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  marginTop: "2rem", // Adjust margin top as needed
+  marginTop: "-2rem", // Adjust margin top as needed
+  marginLeft: "2rem",
+  marginRight: "2rem",
+  marginBottom: "-2rem",
 });
 
 const QuoteIcon = styled(FontAwesomeIcon, {
@@ -75,8 +78,6 @@ const TextInsideQuote = styled("p", {
   fontSize: "4vh",
   fontFamily: "Open Sans", // O puedes usar "Open Sans, sans-serif"
   color: "#86604B",
-  marginTop: "0", // Remove default margin
-  width: "40%", // Adjust width as needed
 });
 
 const MarginTop = styled("div", {
