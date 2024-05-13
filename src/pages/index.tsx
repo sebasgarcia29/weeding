@@ -11,6 +11,7 @@ const Location = dynamic(() => import("@/components/Location"), { ssr: false });
 const Music = dynamic(() => import("@/components/Music"), { ssr: false });
 const Share = dynamic(() => import("@/components/Share"), { ssr: false });
 const Counter = dynamic(() => import("@/components/Counter"), { ssr: false });
+const Links = dynamic(() => import("@/components/Links"), { ssr: false });
 
 const notoSansKR = Noto_Sans_KR({
   weight: ["400", "700"],
@@ -64,6 +65,7 @@ export default function Home() {
         <Title data={JsonData} />
         <Gretting data={JsonData} />
         <Counter data={JsonData} />
+        <Links data={JsonData} />
         <Gallery />
         <Location />
 

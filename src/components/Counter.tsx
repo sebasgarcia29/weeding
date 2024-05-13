@@ -6,7 +6,7 @@ const Container = styled("div", {
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
-    height: '50vh',
+    height: '25vh',
     fontSize: '24px',
     backgroundColor: "rgba(134, 96, 75, 0.2)",
 });
@@ -93,7 +93,7 @@ const CountdownTimer: React.FC = () => {
 
     return (
         <Container>
-            <BigLabel>{'Falta ⏰🎉'}</BigLabel>
+            <BigLabel>{'Falta ⏳'}</BigLabel>
 
             <ContainerTime>
                 <CenteredCapsule style={{ borderLeftStyle: false ? 'solid' : 'none' }}>

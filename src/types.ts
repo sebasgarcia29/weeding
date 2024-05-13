@@ -1,4 +1,6 @@
 type Data = {
+  url_whatsapp: string;
+  url_location: string;
   date: string;
   location: string;
   gretting: string;
