@@ -1,30 +1,86 @@
 import { styled } from "@stitches/react";
-import { Divider } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuoteLeft, faQuoteRight } from "@fortawesome/free-solid-svg-icons";
 
-// Define your styled components
-const Wrapper = styled('div', {
-  textAlign: 'center',
-  marginTop: '50px',
+const Wrapper = styled("div", {
+  textAlign: "center",
+  marginTop: "50px",
 });
 
-const WelcomeText = styled('p', {
-  fontSize: '24px',
+const Container = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  textAlign: "center",
+  marginTop: "50px",
+  minHeight: "50vh",
+  backgroundColor: "#FDFBF6",
+  position: "relative",
 });
 
-const MiddleText = styled('p', {
-  fontSize: '36px',
-  fontWeight: 'bold',
+const ContainerDate = styled("div", {});
+
+const DateText = styled("p", {
+  width: "100%",
+  fontSize: "3.5vh",
+  fontFamily: "FF Clifford Eighteen Regular, serif",
+  borderTop: "2px solid black",
+  borderBottom: "2px solid black",
+  color: "#86604B",
+  borderColor: "#86604B",
 });
 
-const Button = styled('button', {
-  padding: '10px 20px',
-  fontSize: '18px',
-  backgroundColor: '#007bff',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
-  marginTop: '20px',
+const ContainerLabels = styled("div", {
+  position: "absolute",
+  top: "60%", // Center vertically
+  left: "50%", // Center horizontally
+  transform: "translate(-50%, -50%)", // Center the labels
+  zIndex: "1", // Ensure labels appear above background
+});
+
+const BigLabel = styled("p", {
+  fontSize: "9vh",
+  fontFamily: "Playfair Display, serif",
+  margin: "0",
+  color: "#86604B",
+  zIndex: 1, // Ensure text appears above the ampersand
+});
+
+const BigAmpersand = styled("p", {
+  fontSize: "35vh",
+  fontFamily: "Montserrat, sans-serif",
+  margin: "0",
+  color: "rgba(134, 96, 75, 0.2)",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)", // Center the ampersand
+});
+
+const ContainerQuote = styled("div", {
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginTop: "2rem", // Adjust margin top as needed
+});
+
+const QuoteIcon = styled(FontAwesomeIcon, {
+  fontSize: "5vh",
+  color: "rgba(128, 128, 128, 0.5)",
+});
+
+const TextInsideQuote = styled("p", {
+  fontSize: "4vh",
+  fontFamily: "Open Sans", // O puedes usar "Open Sans, sans-serif"
+  color: "#86604B",
+  marginTop: "0", // Remove default margin
+  width: "40%", // Adjust width as needed
+});
+
+const MarginTop = styled("div", {
+  marginTop: "50px",
 });
 
 type GrettingProps = {
@@ -34,9 +90,22 @@ type GrettingProps = {
 export default function Gretting({ data }: GrettingProps) {
   return (
     <Wrapper id="container-greeting">
-      <WelcomeText>Bienvenidos a la Invitacion de</WelcomeText>
-      <MiddleText>Johana & Sebastian</MiddleText>
-      <Button>Ingresar</Button>
+      <Container>
+        <ContainerDate>
+          <DateText>{data?.date}</DateText>
+        </ContainerDate>
+        <ContainerLabels>
+          <BigLabel>{data?.groom.name.toUpperCase()}</BigLabel>
+          <BigAmpersand>{'&'}</BigAmpersand>
+          <BigLabel>{data?.bride.name.toUpperCase()}</BigLabel>
+        </ContainerLabels>
+      </Container>
+      <QuoteIcon icon={faQuoteLeft} />
+      <ContainerQuote>
+        <TextInsideQuote>{'Todos somos mortales, hasta el primer beso y la segunda copa de vino. 🍷'}</TextInsideQuote>
+      </ContainerQuote>
+      <QuoteIcon icon={faQuoteRight} />
+      <MarginTop />
     </Wrapper>
   );
 }
