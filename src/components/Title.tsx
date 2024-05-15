@@ -43,7 +43,7 @@ const VideoBackground = styled("video", {
 });
 
 const WeddingInvitation = styled("p", {
-  fontSize: "8.5vh",
+  fontSize: "6.0vh",
   opacity: 0.6,
   marginBottom: 16,
   color: "white",
@@ -90,22 +90,23 @@ type TitleProps = {
 
 export default function Title({ data }: TitleProps) {
 
-  const smoothScroll = (target, duration) => {
-    const targetElement = document.querySelector(target);
-    const targetPosition = targetElement.getBoundingClientRect().top;
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
+  const smoothScroll = (target: string, duration: number): void => {
+    const targetElement: Element | null = document.querySelector(target);
+    if (!targetElement) return; // Check if target element exists
+    const targetPosition: number = targetElement.getBoundingClientRect().top;
+    const startPosition: number = window.pageYOffset;
+    const distance: number = targetPosition - startPosition;
     let startTime: number | null = null;
 
-    const animation = (currentTime) => {
+    const animation = (currentTime: number): void => {
       if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const scrollAmount = Math.floor(easeInOutQuad(timeElapsed, startPosition, distance, duration));
+      const timeElapsed: number = currentTime - startTime;
+      const scrollAmount: number = Math.floor(easeInOutQuad(timeElapsed, startPosition, distance, duration));
       window.scrollTo(0, scrollAmount);
       if (timeElapsed < duration) requestAnimationFrame(animation);
     };
 
-    const easeInOutQuad = (t, b, c, d) => {
+    const easeInOutQuad = (t: number, b: number, c: number, d: number): number => {
       t /= d / 2;
       if (t < 1) return c / 2 * t * t + b;
       t--;

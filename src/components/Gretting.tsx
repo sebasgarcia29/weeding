@@ -103,7 +103,7 @@ export default function Gretting({ data }: GrettingProps) {
       </Container>
       <QuoteIcon icon={faQuoteLeft} />
       <ContainerQuote>
-        <TextInsideQuote>{'Todos somos mortales, hasta el primer beso y la segunda copa de vino.'}</TextInsideQuote>
+        <TextInsideQuote>{'El amor es irracional; cuanto más quieres a alguien, menos lógica tiene todo'}</TextInsideQuote>
       </ContainerQuote>
       <QuoteIcon icon={faQuoteRight} />
       <MarginTop />

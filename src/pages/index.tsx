@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
 import { FloatingButton } from "@/components/FloatingButton";
+import firebase from "firebase/app"; // Import firebase
+import App from './_app';
 
 const Title = dynamic(() => import("@/components/Title"), { ssr: false });
 const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
@@ -38,6 +40,18 @@ const Footer = styled("footer", {
 });
 
 export default function Home() {
+
+  const firebaseConfig = {
+    apiKey: process.env.API_KEY_FIREBASE,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_UCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+  };
+
+  firebase?.initializeApp(firebaseConfig);
+
 
   React.useEffect(() => {
     const disablePinchZoom = () => {
