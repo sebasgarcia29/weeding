@@ -10,7 +10,6 @@ const Container = styled("div", {
     height: '120vh',
     fontSize: '24px',
     backgroundColor: "rgba(134, 96, 75, 0.2)",
-
 });
 
 const ContainerTitle = styled("div", {
@@ -60,6 +59,8 @@ const ContainerLink = styled("div", {
     marginRight: '2rem',
     width: '90%',
     flexDirection: 'column',
+    alignContent: 'center',
+    alignItems: 'center',
 });
 
 type GrettingProps = {

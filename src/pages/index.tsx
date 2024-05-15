@@ -1,3 +1,4 @@
+import React from "react";
 import Head from "next/head";
 import { Noto_Sans_KR } from "next/font/google";
 import dynamic from "next/dynamic";
@@ -35,11 +36,28 @@ const Footer = styled("footer", {
 });
 
 export default function Home() {
+
+  React.useEffect(() => {
+    const disablePinchZoom = () => {
+      document.addEventListener('gesturestart', function (e) {
+        e.preventDefault();
+      });
+    };
+
+    disablePinchZoom();
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('gesturestart', disablePinchZoom);
+    };
+  }, []);
+
+
   return (
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <meta property="og:type" content="website" />
         <meta content="Johana❤Sebastian" name="Title" />
         <meta
@@ -59,6 +77,7 @@ export default function Home() {
         <meta name="theme-color" content="#BCAAA4" />
         <title>Johana❤Sebastian</title>
         <link rel="icon" href="./assets/couple.ico" type="image/x-icon" />
+
       </Head>
       <main className={`${notoSansKR.className}`}>
         {/* <Music /> */}
