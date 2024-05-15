@@ -4,17 +4,31 @@ import { styled } from "@stitches/react";
 import "react-image-gallery/styles/css/image-gallery.css";
 
 const Wrapper = styled("div", {
-  background: "#efebe9",
-  backgroundImage: "url(./assets/GroovePaper.png)",
-  width: "100%",
+  flex: 1,
+  backgroundColor: "rgba(134, 96, 75, 0.2)",
 });
 
 const Title = styled("p", {
-  fontSize: "2vh",
+  fontSize: "4vh",
+  fontFamily: "Playfair Display, serif",
   fontWeight: "bold",
-  opacity: 0.85,
-  marginBottom: 0,
+  color: "#86604B",
+  textAlign: "center",
+  margin: "0",
 });
+
+const Container = styled("div", {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "1em",
+  // backgroundColor: "rgba(255, 255, 255, 0.6)",
+  backdropFilter: "blur(10px)",
+  zIndex: 1,
+  position: "relative",
+  // borderBottom: "1px solid #86604B",
+  // borderTop: "1px solid #86604B",
+})
 
 const images = [
   {
@@ -46,10 +60,12 @@ const images = [
 export default function Gallery() {
   return (
     <Wrapper>
-      <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
-        <Title>우리의 아름다운 순간</Title>
-      </Divider>
+      <Container>
+        <Title>{String('Retratos de nuestro amor').toUpperCase()}</Title>
+      </Container>
       <ImageGallery
+        infinite
+        autoPlay
         showPlayButton={false}
         showFullscreenButton={false}
         items={images}

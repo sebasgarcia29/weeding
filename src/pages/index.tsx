@@ -4,15 +4,17 @@ import { Noto_Sans_KR } from "next/font/google";
 import dynamic from "next/dynamic";
 import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
+import { FloatingButton } from "@/components/FloatingButton";
 
 const Title = dynamic(() => import("@/components/Title"), { ssr: false });
 const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
-const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
-const Location = dynamic(() => import("@/components/Location"), { ssr: false });
+// const Location = dynamic(() => import("@/components/Location"), { ssr: false });
 const Music = dynamic(() => import("@/components/Music"), { ssr: false });
-const Share = dynamic(() => import("@/components/Share"), { ssr: false });
+// const Share = dynamic(() => import("@/components/Share"), { ssr: false });
 const Counter = dynamic(() => import("@/components/Counter"), { ssr: false });
 const Links = dynamic(() => import("@/components/Links"), { ssr: false });
+const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
+
 
 const notoSansKR = Noto_Sans_KR({
   weight: ["400", "700"],
@@ -61,7 +63,7 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta content="Johana❤Sebastian" name="Title" />
         <meta
-          content="분"
+          content=""
           name="Description"
         />
         <meta content="" name="Keyword" />
@@ -86,12 +88,11 @@ export default function Home() {
         <Counter data={JsonData} />
         <Links data={JsonData} />
         <Gallery />
-        <Location />
-
-        {/* <CongratulatoryMoney data={JsonData} /> */}
-        <Share data={JsonData} />
-        <Footer>Copyright © 2024 Sebasgarcia29</Footer>
+        <Footer>{'Eres una persona muy importante para nosotros ❤️'}</Footer>
+        {/* Floating button */}
+        <FloatingButton />
       </main>
+
     </>
   );
 }

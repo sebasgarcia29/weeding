@@ -61,7 +61,11 @@ interface TimeLeft {
     seconds: number;
 }
 
-const CountdownTimer: React.FC = () => {
+type GrettingProps = {
+    data: Data;
+};
+
+const CountdownTimer = ({ }: GrettingProps) => {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
 
     useEffect(() => {

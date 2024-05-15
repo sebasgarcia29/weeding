@@ -24,7 +24,7 @@ const TitleWrapper = styled("div", {
 
 const TitleMusic = styled("div", {
   position: "absolute",
-  width: "100%%",
+  width: "100%",
   top: "70%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -43,11 +43,14 @@ const VideoBackground = styled("video", {
 });
 
 const WeddingInvitation = styled("p", {
-  fontSize: "3.5vh",
+  fontSize: "8.5vh",
   opacity: 0.6,
   marginBottom: 16,
-  color: "black",
-  fontFamily: "Dancing Script, cursive",
+  color: "white",
+  // fontFamily: "Dancing Script, cursive",
+  fontFamily: "Playfair Display, serif",
+  fontWeight: "bold",
+  textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const GroomBride = styled("p", {
@@ -58,11 +61,15 @@ const GroomBride = styled("p", {
 });
 
 const TextMusic = styled("p", {
-  fontSize: "3.1vh",
+  fontSize: "2.8vh",
   fontWeight: "bold",
   opacity: 0.9,
   marginBottom: 16,
-  fontFamily: "Dancing Script, cursive",
+  // fontFamily: "Dancing Script, cursive",
+  // fontFamily: "Playfair Display, cursive",
+  fontFamily: "Playfair Display, serif",
+  color: "white",
+  textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const StyledButton = styled("button", {
@@ -119,10 +126,10 @@ export default function Title({ data }: TitleProps) {
         <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
       </VideoBackground>
       <TitleWrapper>
-        <WeddingInvitation>{'Bienvenidos a la invitación de:'}</WeddingInvitation>
-        <GroomBride>
+        <WeddingInvitation>{'!Nos casamos! ✨'}</WeddingInvitation>
+        {/* <GroomBride>
           {data?.groom?.name} &#38; {data?.bride?.name}
-        </GroomBride>
+        </GroomBride> */}
       </TitleWrapper>
       <TitleMusic>
         <TextMusic>
