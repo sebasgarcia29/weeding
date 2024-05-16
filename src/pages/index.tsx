@@ -6,13 +6,9 @@ import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
 import { FloatingButton } from "@/components/FloatingButton";
 import firebase from "firebase/app"; // Import firebase
-import App from './_app';
 
 const Title = dynamic(() => import("@/components/Title"), { ssr: false });
 const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
-// const Location = dynamic(() => import("@/components/Location"), { ssr: false });
-const Music = dynamic(() => import("@/components/Music"), { ssr: false });
-// const Share = dynamic(() => import("@/components/Share"), { ssr: false });
 const Counter = dynamic(() => import("@/components/Counter"), { ssr: false });
 const Links = dynamic(() => import("@/components/Links"), { ssr: false });
 const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
@@ -96,7 +92,6 @@ export default function Home() {
 
       </Head>
       <main className={`${notoSansKR.className}`}>
-        {/* <Music /> */}
         <Title data={JsonData} />
         <Gretting data={JsonData} />
         <Counter data={JsonData} />
