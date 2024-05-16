@@ -18,7 +18,7 @@ const ButtonMusic = styled("button", {
 
 export const FloatingButton = () => {
 
-    const { isAudioPlaying, toggleAudio } = useMusic()
+    const { isAudioPlaying, toggleAudio, setIsAudioPlaying } = useMusic()
 
     React.useEffect(() => {
         const audio = new Audio('./assets/media/audio.mp3');
@@ -33,6 +33,22 @@ export const FloatingButton = () => {
         };
     }, [isAudioPlaying]); // Se ejecuta solo una vez al montar el componente
 
+    React.useEffect(() => {
+        const handleVisibilityChange = () => {
+            if (document.hidden) {
+                // Pause audio when the tab is minimized
+                setIsAudioPlaying(false);
+            }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            // Cleanup: remove event listener when component unmounts
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, []);
+
 
     return (
         <ButtonMusic>
@@ -42,7 +58,7 @@ export const FloatingButton = () => {
                 wrapperStyle={{ marginTop: '5px' }}
                 animation={play}
                 strokeColor='#B88474'
-                reverse={isAudioPlaying}
+                reverse={!isAudioPlaying}
             />
         </ButtonMusic>
     );

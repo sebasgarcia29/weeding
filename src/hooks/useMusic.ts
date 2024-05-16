@@ -5,12 +5,12 @@ export const useMusic = () => {
     const [isAudioPlaying, setIsAudioPlaying] = React.useState(false);
 
     const toggleAudio = () => {
-        const newIsAudioPlaying = !isAudioPlaying;
-        setIsAudioPlaying(newIsAudioPlaying);
+        setIsAudioPlaying(!isAudioPlaying);
     };
 
     return {
         isAudioPlaying,
-        toggleAudio
+        toggleAudio,
+        setIsAudioPlaying,
     }
 }
