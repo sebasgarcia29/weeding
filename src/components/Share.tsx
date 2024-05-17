@@ -5,7 +5,8 @@ import { Divider } from "antd";
 import Swal from 'sweetalert2'
 import { sendDataFirebase } from "@/service/sendInformation";
 import ICON from '../../public/assets/music.json';
-
+import NoStrollerIcon from '@mui/icons-material/NoStroller';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
 
 const Wrapper = styled("div", {
   background: "#efebe9",
@@ -72,12 +73,17 @@ const Button = styled("button", {
   backgroundColor: "#C98D7A",
   color: "#fff",
   border: "none",
-  borderRadius: "5px",
+  borderRadius: "25px",
   padding: "10px 20px",
   fontSize: "16px",
   cursor: "pointer",
   display: "block",
   margin: "20px auto 0",
+});
+
+const BoxContainer = styled("div", {
+  width: "50px",
+  height: "50px",
 });
 
 type ShareProps = {
@@ -121,7 +127,22 @@ export default function Share({ data }: ShareProps) {
       },
     });
     if (formValues) {
-      sendDataFirebase(formValues);
+      const response = sendDataFirebase(formValues)
+        .then((_) => {
+          Swal.fire({
+            title: '¡Gracias por tu sugerencia!',
+            text: 'Tu canción será tomada en cuenta para la fiesta',
+            icon: 'success',
+            confirmButtonColor: '#C98D7A',
+          });
+        }).catch((_) => {
+          Swal.fire({
+            title: '¡Lo sentimos!',
+            text: 'Ocurrió un error al enviar tu sugerencia, intentalo de nuevo!',
+            icon: 'error',
+            confirmButtonColor: '#C98D7A',
+          });
+        })
     }
   };
 
@@ -144,6 +165,26 @@ export default function Share({ data }: ShareProps) {
           </Icon>
           <Description>{'¿Cuál es la canción que no debe faltar en la PlayList de la fiesta?'}</Description>
           <Button onClick={onAddSong}>{'Sugerir canción'}</Button>
+        </CardContainer>
+      </CenteredContainer>
+      <CenteredContainer>
+        <CardContainer style={{ marginBottom: '100px' }}>
+          <TitleCard>{'NO niños'}</TitleCard>
+          <Icon>
+            <NoStrollerIcon sx={{ fontSize: 100, color: 'red' }} />
+          </Icon>
+        </CardContainer>
+      </CenteredContainer>
+      <CenteredContainer>
+        <CardContainer style={{ marginBottom: '200px' }}>
+          <TitleCard>{'Codigo de Vestir'}</TitleCard>
+          <Icon>
+            <CheckroomIcon sx={{ fontSize: 100, color: 'lightgrey' }} />
+          </Icon>
+          <Description>{'Mujeres'}</Description>
+          <Description>{'Vestio o traje semiformal (No blanco)'}</Description>
+          <Description>{'Hombres'}</Description>
+          <Description>{'Traje semiformal'}</Description>
         </CardContainer>
       </CenteredContainer>
     </Wrapper>

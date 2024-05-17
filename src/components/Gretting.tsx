@@ -70,7 +70,7 @@ const ContainerQuote = styled("div", {
 });
 
 const QuoteIcon = styled(FontAwesomeIcon, {
-  fontSize: "2vh",
+  fontSize: "3vh",
   color: "rgba(128, 128, 128, 0.5)",
   padding: "0.5rem",
 });
@@ -102,11 +102,12 @@ export default function Gretting({ data }: GrettingProps) {
           <BigLabel>{data?.bride.name.toUpperCase()}</BigLabel>
         </ContainerLabels>
       </Container>
-      <QuoteIcon icon={faQuoteLeft} />
+
       <ContainerQuote>
+        <QuoteIcon icon={faQuoteLeft} />
         <TextInsideQuote>{'El amor es irracional; cuanto más quieres a alguien, menos lógica tiene todo'}</TextInsideQuote>
+        <QuoteIcon icon={faQuoteRight} />
       </ContainerQuote>
-      <QuoteIcon icon={faQuoteRight} />
       <MarginTop />
     </Wrapper>
   );
