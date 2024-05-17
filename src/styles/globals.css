@@ -67,3 +67,8 @@ body {
   background-color: #a1695d;
   /* Otros estilos para el hover */
 }
+
+.swal-input:hover {
+  border-color: red;
+  /* Cambia el color del borde en hover */
+}
