@@ -28,7 +28,7 @@ END:VCALENDAR`;
 };
 
 export const ConfirmAssistance = (numberWhatsapp: string) => {
-    const message = "Confirmo asistencia!"; // Predefined message
+    const message = "¡Me alegra mucho confirmar mi asistencia a su boda el 21 de septiembre!"; // Predefined message
     const whatsappURL = `https://wa.me/${numberWhatsapp}?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
 }
