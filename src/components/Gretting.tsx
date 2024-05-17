@@ -70,12 +70,13 @@ const ContainerQuote = styled("div", {
 });
 
 const QuoteIcon = styled(FontAwesomeIcon, {
-  fontSize: "5vh",
+  fontSize: "2vh",
   color: "rgba(128, 128, 128, 0.5)",
+  padding: "0.5rem",
 });
 
 const TextInsideQuote = styled("p", {
-  fontSize: "4vh",
+  fontSize: "2.5vh",
   fontFamily: "Open Sans", // O puedes usar "Open Sans, sans-serif"
   color: "#86604B",
 });

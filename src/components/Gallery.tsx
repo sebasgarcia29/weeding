@@ -21,14 +21,19 @@ const Container = styled("div", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  padding: "1em",
-  // backgroundColor: "rgba(255, 255, 255, 0.6)",
   backdropFilter: "blur(10px)",
   zIndex: 1,
   position: "relative",
-  // borderBottom: "1px solid #86604B",
-  // borderTop: "1px solid #86604B",
 })
+
+const Description = styled("p", {
+  fontSize: "2.5vh",
+  fontFamily: "Playfair Display, serif",
+  fontWeight: "bold",
+  color: "#86604B",
+  textAlign: "center",
+  margin: "0",
+});
 
 const images = [
   {
@@ -58,17 +63,32 @@ const images = [
 ];
 
 export default function Gallery() {
+
+  const renderCustomItem = (item: any) => {
+    return (
+      <img
+        src={item.original}
+        alt={item.originalAlt}
+        style={{ width: '100%', height: 'auto' }}
+      />
+    );
+  };
+
   return (
     <Wrapper>
-      <Container>
+      <Container style={{ paddingLeft: "0.5em", paddingRight: '0.5em', paddingBottom: '1em' }}>
         <Title>{String('Retratos de nuestro amor').toUpperCase()}</Title>
       </Container>
+      <Container style={{ padding: '20px', paddingLeft: '4em', paddingRight: '4em', backgroundColor: 'white' }}>
+        <Description>{'Un minuto, un segundo, un instante que queda en la eternidad'}</Description>
+      </Container>
       <ImageGallery
-        infinite
-        autoPlay
+        // infinite
+        // autoPlay
         showPlayButton={false}
         showFullscreenButton={false}
         items={images}
+        renderItem={renderCustomItem} // Custom render function
       />
     </Wrapper>
   );

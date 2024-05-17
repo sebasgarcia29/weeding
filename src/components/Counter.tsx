@@ -54,6 +54,10 @@ const BigLabel = styled("p", {
     color: "#86604B",
 });
 
+const Icon = styled("span", {
+    fontSize: "0.6em"
+});
+
 interface TimeLeft {
     days: number;
     hours: number;
@@ -97,7 +101,9 @@ const CountdownTimer = ({ }: GrettingProps) => {
 
     return (
         <Container>
-            <BigLabel>{'Falta ⏳'}</BigLabel>
+            <BigLabel>
+                {'Falta'} <Icon>⏳</Icon>
+            </BigLabel>
 
             <ContainerTime>
                 <CenteredCapsule style={{ borderLeftStyle: false ? 'solid' : 'none' }}>
