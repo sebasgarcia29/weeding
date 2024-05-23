@@ -91,6 +91,10 @@ export default function Home() {
         <meta name="theme-color" content="#BCAAA4" />
         <title>Johana❤Sebastian</title>
         <link rel="icon" href="./assets/couple.ico" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
 
       </Head>
       <main className={`${notoSansKR.className}`}>

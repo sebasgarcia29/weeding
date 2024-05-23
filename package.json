@@ -28,6 +28,7 @@
     "@stitches/react": "^1.2.8",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-image-gallery": "^1.2.4",
+    "animate.css": "^4.1.1",
     "antd": "^5.14.2",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.0",

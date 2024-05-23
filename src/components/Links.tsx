@@ -1,6 +1,8 @@
 import React from 'react'
 import { styled } from "@stitches/react";
 import { ConfirmAssistance, handleAgendarClick, sendLocation } from '@/utils/utils';
+import Swal from 'sweetalert2';
+import { sendDataGuestsFirebase, UserType } from '@/service/sendInformation';
 
 const Container = styled("div", {
     display: 'flex',
@@ -68,6 +70,117 @@ type GrettingProps = {
 };
 
 const Links = ({ data }: GrettingProps) => {
+
+
+    const handleConfirmAssistance = async () => {
+        let formValues = {
+            name: '',
+            action: '',
+            invitedBy: ''
+        };
+        const styleInputs = 'style="width: calc(100% - 20px); padding: 10px; margin: 5px 0; box-sizing: border-box;"';
+        const styleSelect = 'style="width: calc(100% - 20px); height: 40px; margin: 5px 0; box-sizing: border-box; font-size: 16px;"';
+        await Swal.fire({
+            title: 'Confirmar o rechazar asistencia',
+            html: `
+            <input id="name" placeholder="Tu nombre completo" ${styleInputs}>
+                <div style="margin: 5px 0;">
+                    <select id="invitedBy" ${styleSelect} style="padding: 12px; font-size: 16px; color: rgba(0, 0, 0, 0.5);" onfocus="this.style.color='black';" onblur="this.style.color='inherit';">
+                        <option value="">Invitado por...</option>
+                        <option value="Sebastian" style="background-color: transparent;">Invitado por &#x1F935;&#x1F3FD; Sebastian</option>
+                        <option value="Johana" style="background-color: transparent;">Invitado por &#x1F470;&#x1F3FD; Johana</option>
+                    </select>
+                </div>
+            <div style="display: flex; justify-content: space-around;">
+              <button id="confirmButton" type="button" style="flex: 1; background-color: #ddd; color: white; border: none; margin: 10px; border-radius: 10px; font-size: 16px; padding: 12px 20px;">
+                Confirmar 🎉
+              </button>
+              <button id="rejectButton" type="button" style="flex: 1; background-color: #ddd; color: white; border: none; margin: 10px; border-radius: 10px; font-size: 16px; padding: 12px 20px;">
+                Rechazar ❌
+              </button>
+            </div>
+            `,
+            showCancelButton: false,
+            showConfirmButton: true,
+            confirmButtonText: 'Enviar',
+            confirmButtonColor: '#C98D7A',
+            allowOutsideClick: false,
+            showCloseButton: true,
+            showClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeInUp
+                  animate__faster
+                `
+            },
+            hideClass: {
+                popup: `
+                  animate__animated
+                  animate__fadeOutDown
+                  animate__faster
+                `
+            },
+            didOpen: () => {
+                const input1 = document.getElementById('name') as HTMLInputElement;
+                const invitedBySelect = document.getElementById('invitedBy') as HTMLSelectElement;
+                const confirmButton = document.getElementById('confirmButton') as HTMLButtonElement;
+                const rejectButton = document.getElementById('rejectButton') as HTMLButtonElement;
+
+                input1.addEventListener('input', () => {
+                    formValues.name = input1.value;
+                });
+
+                invitedBySelect.addEventListener('change', () => {
+                    formValues.invitedBy = invitedBySelect.value;
+                });
+
+                confirmButton.addEventListener('click', () => {
+                    confirmButton.style.backgroundColor = '#65D46E';
+                    rejectButton.style.backgroundColor = '#ddd';
+                    formValues.action = 'Confirm';
+                });
+
+                rejectButton.addEventListener('click', () => {
+                    rejectButton.style.backgroundColor = '#EB583A';
+                    confirmButton.style.backgroundColor = '#ddd';
+                    formValues.action = 'Reject';
+                });
+            },
+        });
+
+        if (formValues.action && formValues.name && formValues.invitedBy) {
+            //TODO: Send data to firebase
+            sendDataGuestsFirebase({
+                nameGuest: formValues.name,
+                confirm: formValues.action === 'Confirm',
+                from: formValues.invitedBy === 'Sebastian' ? UserType.SEBASTIAN_GUEST : UserType.JOHANA_GUEST
+            }).then((res) => {
+                Swal.fire({
+                    title: '¡Gracias por tu respuesta!',
+                    text: '¡Te esperamos el 21 de septiembre!',
+                    icon: 'success',
+                    confirmButtonColor: '#C98D7A',
+                });
+            }).catch((err) => {
+                Swal.fire({
+                    title: '¡Lo sentimos!',
+                    text: 'Ocurrió un error al enviar respuesta, intentalo de nuevo!',
+                    icon: 'error',
+                    confirmButtonColor: '#C98D7A',
+                });
+            })
+        } else {
+            Swal.fire({
+                title: '¡Lo sentimos!',
+                text: 'Por favor completa todos los campos',
+                icon: 'error',
+                confirmButtonColor: '#C98D7A',
+            });
+        }
+
+    }
+
+
     return (
         <Container>
             <ContainerTitle>
@@ -81,14 +194,17 @@ const Links = ({ data }: GrettingProps) => {
             <ContainerLink>
                 <Label>{String('lugar 🏡').toUpperCase()}</Label>
                 <Description>{'Intiraimi | Salón de Eventos'}</Description>
-                <Button style={{ backgroundColor: '#F9A88B' }}
+                {/* <Button style={{ backgroundColor: '#F9A88B' }}
                     onClick={() => {
                         ConfirmAssistance(data.url_whatsapp_novia)
                     }}>{'Confirmar Asistencia novía 👰🏽‍♀️'}</Button>
                 <Button style={{ backgroundColor: '#98DA6C' }}
                     onClick={() => {
                         ConfirmAssistance(data.url_whatsapp_novio)
-                    }}>{'Confirmar Asistencia novío 🤵🏽'}</Button>
+                    }}>{'Confirmar Asistencia novío 🤵🏽'}</Button> */}
+                <Button onClick={handleConfirmAssistance}>
+                    {'¡Confirmar Asistencia!'}
+                </Button>
             </ContainerLink>
             <ContainerLink>
                 <Label>{String('Dirección 📍').toUpperCase()}</Label>

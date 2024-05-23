@@ -115,6 +115,20 @@ export default function Share({ data }: ShareProps) {
         confirmButton: 'swal-confirm-button',
         input: 'swal-input', // Custom class for the input fields
       },
+      showClass: {
+        popup: `
+          animate__animated
+          animate__fadeInUp
+          animate__faster
+        `
+      },
+      hideClass: {
+        popup: `
+          animate__animated
+          animate__fadeOutDown
+          animate__faster
+        `
+      },
       preConfirm: () => {
         const input1 = document.getElementById('name') as HTMLInputElement;
         const input2 = document.getElementById('nameSong') as HTMLInputElement;
@@ -127,7 +141,7 @@ export default function Share({ data }: ShareProps) {
       },
     });
     if (formValues) {
-      const response = sendDataFirebase(formValues)
+      sendDataFirebase(formValues)
         .then((_) => {
           Swal.fire({
             title: '¡Gracias por tu sugerencia!',

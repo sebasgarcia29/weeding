@@ -91,7 +91,7 @@ type GrettingProps = {
 
 export default function Gretting({ data }: GrettingProps) {
   return (
-    <Wrapper id="container-greeting">
+    <Wrapper id="container-greeting" className="animate__animated animate__bounce">
       <Container>
         <ContainerDate>
           <DateText>{data?.date}</DateText>
