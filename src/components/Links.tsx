@@ -69,6 +69,16 @@ type GrettingProps = {
     data: Data;
 };
 
+{/* 
+        const styleSelect = 'style="width: calc(100% - 20px); height: 40px; margin: 5px 0; box-sizing: border-box; font-size: 16px;"';
+<div style="margin: 5px 0;">
+<select id="invitedBy" ${styleSelect} style="padding: 12px; font-size: 16px; color: rgba(0, 0, 0, 0.5);" onfocus="this.style.color='black';" onblur="this.style.color='inherit';">
+    <option value="">Invitado por...</option>
+    <option value="Sebastian" style="background-color: transparent;">Invitado por &#x1F935;&#x1F3FD; Sebastian</option>
+    <option value="Johana" style="background-color: transparent;">Invitado por &#x1F470;&#x1F3FD; Johana</option>
+</select>
+</div> */}
+
 const Links = ({ data }: GrettingProps) => {
 
 
@@ -79,18 +89,10 @@ const Links = ({ data }: GrettingProps) => {
             invitedBy: ''
         };
         const styleInputs = 'style="width: calc(100% - 20px); padding: 10px; margin: 5px 0; box-sizing: border-box;"';
-        const styleSelect = 'style="width: calc(100% - 20px); height: 40px; margin: 5px 0; box-sizing: border-box; font-size: 16px;"';
         await Swal.fire({
             title: 'Confirmar o rechazar asistencia',
             html: `
             <input id="name" placeholder="Tu nombre completo" ${styleInputs}>
-                <div style="margin: 5px 0;">
-                    <select id="invitedBy" ${styleSelect} style="padding: 12px; font-size: 16px; color: rgba(0, 0, 0, 0.5);" onfocus="this.style.color='black';" onblur="this.style.color='inherit';">
-                        <option value="">Invitado por...</option>
-                        <option value="Sebastian" style="background-color: transparent;">Invitado por &#x1F935;&#x1F3FD; Sebastian</option>
-                        <option value="Johana" style="background-color: transparent;">Invitado por &#x1F470;&#x1F3FD; Johana</option>
-                    </select>
-                </div>
             <div style="display: flex; justify-content: space-around;">
               <button id="confirmButton" type="button" style="flex: 1; background-color: #ddd; color: white; border: none; margin: 10px; border-radius: 10px; font-size: 16px; padding: 12px 20px;">
                 Confirmar 🎉
@@ -122,7 +124,7 @@ const Links = ({ data }: GrettingProps) => {
             },
             didOpen: () => {
                 const input1 = document.getElementById('name') as HTMLInputElement;
-                const invitedBySelect = document.getElementById('invitedBy') as HTMLSelectElement;
+                // const invitedBySelect = document.getElementById('invitedBy') as HTMLSelectElement;
                 const confirmButton = document.getElementById('confirmButton') as HTMLButtonElement;
                 const rejectButton = document.getElementById('rejectButton') as HTMLButtonElement;
 
@@ -130,9 +132,9 @@ const Links = ({ data }: GrettingProps) => {
                     formValues.name = input1.value;
                 });
 
-                invitedBySelect.addEventListener('change', () => {
-                    formValues.invitedBy = invitedBySelect.value;
-                });
+                // invitedBySelect.addEventListener('change', () => {
+                //     formValues.invitedBy = invitedBySelect.value;
+                // });
 
                 confirmButton.addEventListener('click', () => {
                     confirmButton.style.backgroundColor = '#65D46E';

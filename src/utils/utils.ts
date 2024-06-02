@@ -36,3 +36,8 @@ export const ConfirmAssistance = (numberWhatsapp: string) => {
 export const sendLocation = (urlLocation: string) => {
     window.open(urlLocation, "_blank");
 }
+
+export const capitalizeFirstLetter = (string: string) => {
+    if (!string) return string;
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}

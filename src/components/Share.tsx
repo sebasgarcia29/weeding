@@ -33,7 +33,7 @@ const CenteredContainer = styled("div", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  height: "40vh",
+  marginTop: "20px",
 });
 
 const CardContainer = styled("div", {
@@ -81,9 +81,31 @@ const Button = styled("button", {
   margin: "20px auto 0",
 });
 
-const BoxContainer = styled("div", {
-  width: "50px",
-  height: "50px",
+const ContainerBox = styled('div', {
+  display: 'flex',
+  flexDirection: 'row',
+  alignContent: 'center',
+  justifyContent: 'center',
+})
+
+const BoxContainer = styled('div', {
+  width: '20px',
+  height: '20px',
+  display: 'inline-block',
+  margin: '10px',
+  borderColor: '#000',
+  borderStyle: 'solid',
+  borderWidth: '2px',
+});
+
+const StyledImg = styled('img', {
+  width: "60%",
+  height: "auto",
+});
+
+const StrikeThrough = styled("span", {
+  textDecoration: "line-through",
+  color: "red",
 });
 
 type ShareProps = {
@@ -160,6 +182,9 @@ export default function Share({ data }: ShareProps) {
     }
   };
 
+  const colors = ['#000', '#fff', '#E3D1BB', '#E3D1BB', '#070830'];
+  const colorsWomen = ['#A56947', '#05090C', '#DCCCC3', '#7B2929', '#323C1B'];
+
   return (
     <Wrapper>
       <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
@@ -168,7 +193,7 @@ export default function Share({ data }: ShareProps) {
       <TextInsideQuote>{'Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta'}</TextInsideQuote>
       <CenteredContainer>
         <CardContainer>
-          <TitleCard>{String('Música').toUpperCase()}</TitleCard>
+          <TitleCard>{String('Música 🎶').toUpperCase()}</TitleCard>
           <Icon>
             <Player
               ref={playerRef}
@@ -182,23 +207,45 @@ export default function Share({ data }: ShareProps) {
         </CardContainer>
       </CenteredContainer>
       <CenteredContainer>
-        <CardContainer style={{ marginBottom: '100px' }}>
-          <TitleCard>{'NO niños'}</TitleCard>
-          <Icon>
-            <NoStrollerIcon sx={{ fontSize: 100, color: 'red' }} />
-          </Icon>
+        <CardContainer>
+          <TitleCard>{'Codigo de vestimenta femenino 👒'}</TitleCard>
+          <Description>{'Mujeres'}</Description>
+          <Description>
+            Vestido o traje semiformal (<StrikeThrough>No blanco</StrikeThrough>)
+          </Description>
+          <ContainerBox>
+            {colorsWomen.map((color, index) => (
+              <BoxContainer key={index} style={{ backgroundColor: color }} />
+            ))}
+          </ContainerBox>
+          <StyledImg src={'./assets/dress.png'} alt="Description of image" />
         </CardContainer>
       </CenteredContainer>
       <CenteredContainer>
-        <CardContainer style={{ marginBottom: '200px' }}>
-          <TitleCard>{'Codigo de Vestir'}</TitleCard>
-          <Icon>
-            <CheckroomIcon sx={{ fontSize: 100, color: 'lightgrey' }} />
-          </Icon>
-          <Description>{'Mujeres'}</Description>
-          <Description>{'Vestio o traje semiformal (No blanco)'}</Description>
+        <CardContainer>
+          <TitleCard>{'Codigo de vestimenta masculino 🎩'}</TitleCard>
           <Description>{'Hombres'}</Description>
-          <Description>{'Traje semiformal'}</Description>
+          <Description>{'Traje semiformal o de preferencia formal'}</Description>
+          <ContainerBox>
+            {colors.map((color, index) => (
+              <BoxContainer key={index} style={{ backgroundColor: color }} />
+            ))}
+          </ContainerBox>
+          <StyledImg src={'./assets/traje.png'} alt="Description of image" />
+        </CardContainer>
+      </CenteredContainer>
+      <CenteredContainer>
+        <CardContainer>
+          <TitleCard>{'NO niños 🚼'}</TitleCard>
+          <Description>{'Relajate, es sin niños, invitación solo para adultos'}</Description>
+          <StyledImg src={'./assets/not-kids.webp'} alt="Description of image" />
+        </CardContainer>
+      </CenteredContainer>
+      <CenteredContainer style={{ marginBottom: '100px' }}>
+        <CardContainer>
+          <TitleCard>{'Regalos 🎁'}</TitleCard>
+          <Description>{'Si deseas regalarnos algo mas que tu hermosa presencia...'}</Description>
+          <Button>{'Ver mas'}</Button>
         </CardContainer>
       </CenteredContainer>
     </Wrapper>

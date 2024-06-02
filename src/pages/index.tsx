@@ -8,7 +8,7 @@ import { FloatingButton } from "@/components/FloatingButton";
 import firebase from "firebase/app"; // Import firebase
 require('dotenv').config();
 
-const Title = dynamic(() => import("@/components/Title"), { ssr: false });
+const Title = dynamic(() => import("@/components/FirstSection/FirstSection"), { ssr: false });
 const Gretting = dynamic(() => import("@/components/Gretting"), { ssr: false });
 const Counter = dynamic(() => import("@/components/Counter"), { ssr: false });
 const Links = dynamic(() => import("@/components/Links"), { ssr: false });
