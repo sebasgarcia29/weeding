@@ -6,6 +6,7 @@ import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
 import { FloatingButton } from "@/components/FloatingButton";
 import firebase from "firebase/app"; // Import firebase
+import { db } from "@/config/firebaseConfig";
 require('dotenv').config();
 
 const Title = dynamic(() => import("@/components/FirstSection/FirstSection"), { ssr: false });
@@ -39,17 +40,7 @@ const Footer = styled("footer", {
 
 export default function Home() {
 
-  const firebaseConfig = {
-    apiKey: process.env.API_KEY_FIREBASE,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_UCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID,
-  };
-
-  firebase?.initializeApp(firebaseConfig);
-
+  db;
 
   React.useEffect(() => {
     const disablePinchZoom = () => {

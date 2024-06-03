@@ -1,8 +1,9 @@
 import React from 'react'
 import { styled } from "@stitches/react";
-import { ConfirmAssistance, handleAgendarClick, sendLocation } from '@/utils/utils';
+import { handleAgendarClick, sendLocation } from '@/utils/utils';
 import Swal from 'sweetalert2';
-import { sendDataGuestsFirebase, UserType } from '@/service/sendInformation';
+import { confirmOrRejectAssistance, getServerSideProps, sendDataGuestsFirebase } from '@/service/sendInformation';
+import { useRouter } from 'next/router';
 
 const Container = styled("div", {
     display: 'flex',
@@ -79,84 +80,90 @@ type GrettingProps = {
 </select>
 </div> */}
 
+enum Status {
+    CONFIRMED = 'confirmed',
+    PENDING = 'pending',
+    REJECTED = 'rejected'
+}
+
+interface IInvites {
+    numberOfGuests: number;
+    invitados: string[];
+    status: Status;
+    phoneNumber: string;
+}
+
 const Links = ({ data }: GrettingProps) => {
 
 
+    const router = useRouter();
+    const { id } = router.query;
+    const [inviteData, setInviteData] = React.useState<IInvites>();
+
+    React.useEffect(() => {
+        if (id?.length ?? 0 > 0) {
+            getServerSideProps(id?.toString() ?? '').then((res) => {
+                const response = res.props?.inviteData;
+                const parseData = {
+                    numberOfGuests: response.invitados.length,
+                    invitados: response.invitados,
+                    status: response.status,
+                    phoneNumber: response.telefono
+                }
+                setInviteData(parseData)
+            }).catch((err) => {
+                console.log('error in getServerSideProps>>>>')
+            })
+        }
+
+    }, [id])
+
+
+
     const handleConfirmAssistance = async () => {
-        let formValues = {
-            name: '',
-            action: '',
-            invitedBy: ''
-        };
-        const styleInputs = 'style="width: calc(100% - 20px); padding: 10px; margin: 5px 0; box-sizing: border-box;"';
-        await Swal.fire({
-            title: 'Confirmar o rechazar asistencia',
-            html: `
-            <input id="name" placeholder="Tu nombre completo" ${styleInputs}>
-            <div style="display: flex; justify-content: space-around;">
-              <button id="confirmButton" type="button" style="flex: 1; background-color: #ddd; color: white; border: none; margin: 10px; border-radius: 10px; font-size: 16px; padding: 12px 20px;">
-                Confirmar 🎉
-              </button>
-              <button id="rejectButton" type="button" style="flex: 1; background-color: #ddd; color: white; border: none; margin: 10px; border-radius: 10px; font-size: 16px; padding: 12px 20px;">
-                Rechazar ❌
-              </button>
+        const invitees = inviteData?.invitados || [];
+
+        const htmlContent = invitees.map((invitee, index) => `
+            <div class="row" style="display: flex; align-items: center; margin-bottom: 10px;">
+                <label for="attendance-${index}" style="flex-basis: 50%;">${invitee}</label>
+                <select id="attendance-${index}" class="swal2-input" style="flex-basis: 50%;">
+                    <option value="accepted">¡Confirmo! 🤩</option>
+                    <option value="rejected">Lo siento, no puedo 🥺</option>
+                </select>
             </div>
-            `,
-            showCancelButton: false,
-            showConfirmButton: true,
-            confirmButtonText: 'Enviar',
-            confirmButtonColor: '#C98D7A',
-            allowOutsideClick: false,
-            showCloseButton: true,
-            showClass: {
-                popup: `
-                  animate__animated
-                  animate__fadeInUp
-                  animate__faster
-                `
-            },
-            hideClass: {
-                popup: `
-                  animate__animated
-                  animate__fadeOutDown
-                  animate__faster
-                `
-            },
-            didOpen: () => {
-                const input1 = document.getElementById('name') as HTMLInputElement;
-                // const invitedBySelect = document.getElementById('invitedBy') as HTMLSelectElement;
-                const confirmButton = document.getElementById('confirmButton') as HTMLButtonElement;
-                const rejectButton = document.getElementById('rejectButton') as HTMLButtonElement;
+        `).join('');
 
-                input1.addEventListener('input', () => {
-                    formValues.name = input1.value;
+        const { value: formValues } = await Swal.fire({
+            title: "Confirmar Asistencia",
+            html: htmlContent,
+            focusConfirm: false,
+            showCancelButton: true,
+            confirmButtonText: "Enviar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#CA8D76",
+            preConfirm: () => {
+                const results = invitees.map((_, index) => {
+                    const attendanceElement = document.getElementById(`attendance-${index}`) as HTMLInputElement;
+                    const attendance = attendanceElement ? attendanceElement.value : '';
+                    return { name: invitees[index], attendance };
                 });
 
-                // invitedBySelect.addEventListener('change', () => {
-                //     formValues.invitedBy = invitedBySelect.value;
-                // });
-
-                confirmButton.addEventListener('click', () => {
-                    confirmButton.style.backgroundColor = '#65D46E';
-                    rejectButton.style.backgroundColor = '#ddd';
-                    formValues.action = 'Confirm';
-                });
-
-                rejectButton.addEventListener('click', () => {
-                    rejectButton.style.backgroundColor = '#EB583A';
-                    confirmButton.style.backgroundColor = '#ddd';
-                    formValues.action = 'Reject';
-                });
+                return results;
             },
+            allowOutsideClick: () => !Swal.isLoading(),
         });
 
-        if (formValues.action && formValues.name && formValues.invitedBy) {
-            //TODO: Send data to firebase
+        if (formValues) {
+            formValues.forEach(async (guest: any) => {
+                confirmOrRejectAssistance({
+                    nameGuest: guest.name,
+                    status: guest.attendance === 'accepted'
+                })
+            })
             sendDataGuestsFirebase({
-                nameGuest: formValues.name,
-                confirm: formValues.action === 'Confirm',
-                from: formValues.invitedBy === 'Sebastian' ? UserType.SEBASTIAN_GUEST : UserType.JOHANA_GUEST
-            }).then((res) => {
+                nameGuest: formValues[0].name,
+                status: formValues[0].attendance === 'accepted'
+            }, id?.toString() ?? '').then((res) => {
                 Swal.fire({
                     title: '¡Gracias por tu respuesta!',
                     text: '¡Te esperamos el 21 de septiembre!',
@@ -166,21 +173,13 @@ const Links = ({ data }: GrettingProps) => {
             }).catch((err) => {
                 Swal.fire({
                     title: '¡Lo sentimos!',
-                    text: 'Ocurrió un error al enviar respuesta, intentalo de nuevo!',
+                    text: 'Agradecemos mucho tu respuesta!',
                     icon: 'error',
                     confirmButtonColor: '#C98D7A',
                 });
             })
-        } else {
-            Swal.fire({
-                title: '¡Lo sentimos!',
-                text: 'Por favor completa todos los campos',
-                icon: 'error',
-                confirmButtonColor: '#C98D7A',
-            });
         }
-
-    }
+    };
 
 
     return (

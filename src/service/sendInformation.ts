@@ -1,4 +1,5 @@
-
+import { db } from "@/config/firebaseConfig";
+import { get, ref, set, update } from "firebase/database";
 
 interface IData {
     name: string;
@@ -6,47 +7,69 @@ interface IData {
     linkSong?: string;
 }
 
-const urlGateway = process.env.GATEWAY || 'https://wedding-invitation-a8b56-default-rtdb.firebaseio.com';
-
 export const sendDataFirebase = async (data: IData) => {
     try {
-        await fetch(`${urlGateway}/data.json`, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        return true
+        const newDataRef = ref(db, 'data/' + Date.now());
+        await set(newDataRef, data);
+        return true;
     } catch (error) {
-        console.log('Error in sendDataFirebase', error)
-        return false
+        console.log('Error in sendDataFirebase', error);
+        return false;
     }
 }
 
-export enum UserType {
-    JOHANA_GUEST = "johana_guest",
-    SEBASTIAN_GUEST = "sebastian_guest"
-}
-
-interface IGuess {
+interface IGuest {
     nameGuest: string;
-    from: UserType;
-    confirm: boolean;
+    status: boolean;
 }
 
-export const sendDataGuestsFirebase = async (data: IGuess) => {
+export const sendDataGuestsFirebase = async (data: IGuest, id: string) => {
     try {
-        await fetch(`${urlGateway}/guests.json`, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        return true
+        const inviteRef = ref(db, `invites/${id}`);
+
+        const updates = {
+            ...data,
+            status: data.status ? 'confirmed' : 'rejected'
+        };
+
+        await update(inviteRef, updates);
+        return true;
     } catch (error) {
-        console.log('Error in sendDataFirebase', error)
-        return false
+        console.log('Error in sendDataGuestsFirebase', error);
+        return false;
     }
+};
+
+export const confirmOrRejectAssistance = async (data: IGuest) => {
+    try {
+        const inviteRef = ref(db, 'assistance/' + Date.now());
+
+        const updates = {
+            name: data.nameGuest,
+            status: data.status ? 'confirmed' : 'rejected'
+        };
+
+        await set(inviteRef, updates);
+        return true;
+    } catch (error) {
+        console.log('Error in confirmOrRejectAssistance', error);
+        return false;
+    }
+}
+
+export async function getServerSideProps(id: string) {
+    const dbRef = ref(db, `invites/${id}`);
+    // const dbRef = ref(db, `invites/-NzPZeaSAkEF_GROFjh8`);
+    const snapshot = await get(dbRef);
+    if (!snapshot.exists()) {
+        return {
+            notFound: true,
+        };
+    }
+    const inviteData = snapshot.val();
+    return {
+        props: {
+            inviteData,
+        },
+    };
 }
