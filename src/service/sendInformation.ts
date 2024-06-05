@@ -19,9 +19,15 @@ export const sendDataFirebase = async (data: IData) => {
 }
 
 interface IGuest {
-    nameGuest: string;
     status: boolean;
+    confirmados: IAttendance;
 }
+
+interface IAttendance {
+    name: string;
+    attendance: string;
+}
+
 
 export const sendDataGuestsFirebase = async (data: IGuest, id: string) => {
     try {
@@ -40,7 +46,12 @@ export const sendDataGuestsFirebase = async (data: IGuest, id: string) => {
     }
 };
 
-export const confirmOrRejectAssistance = async (data: IGuest) => {
+interface IConfirmAssistance {
+    status: boolean;
+    nameGuest: string;
+}
+
+export const confirmOrRejectAssistance = async (data: IConfirmAssistance) => {
     try {
         const inviteRef = ref(db, 'assistance/' + Date.now());
 

@@ -161,8 +161,8 @@ const Links = ({ data }: GrettingProps) => {
                 })
             })
             sendDataGuestsFirebase({
-                nameGuest: formValues[0].name,
-                status: formValues[0].attendance === 'accepted'
+                status: formValues[0].attendance === 'accepted',
+                confirmados: formValues
             }, id?.toString() ?? '').then((res) => {
                 Swal.fire({
                     title: '¡Gracias por tu respuesta!',
