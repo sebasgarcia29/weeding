@@ -69,6 +69,14 @@ const Description = styled("p", {
   fontFamily: "Roboto, sans-serif", // Use Roboto font
 });
 
+const TitleFormal = styled("p", {
+  fontSize: "16px",
+  textAlign: "center",
+  color: '#847870',
+  fontWeight: "normal",
+  fontFamily: "myElegantFont, sans-serif",
+});
+
 const Button = styled("button", {
   backgroundColor: "#C98D7A",
   color: "#fff",
@@ -193,7 +201,7 @@ export default function Share({ data }: ShareProps) {
       <TextInsideQuote>{'Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta'}</TextInsideQuote>
       <CenteredContainer>
         <CardContainer>
-          <TitleCard>{String('Música 🎶').toUpperCase()}</TitleCard>
+          <TitleCard>{'Música'}</TitleCard>
           <Icon>
             <Player
               ref={playerRef}
@@ -202,26 +210,21 @@ export default function Share({ data }: ShareProps) {
               onComplete={() => playerRef.current?.playFromBeginning()}
             />
           </Icon>
-          <Description>{'¿Cuál es la canción que no debe faltar en la PlayList de la fiesta?'}</Description>
+          <Description>{'¿Cuál es la canción que no debe faltar en la playlist de la fiesta?'}</Description>
           <Button onClick={onAddSong}>{'Sugerir canción'}</Button>
         </CardContainer>
       </CenteredContainer>
       <CenteredContainer>
         <CardContainer>
-          <TitleCard>{'Codigo de vestimenta femenino 👒'}</TitleCard>
-          <Description>{'Mujeres'}</Description>
+          <TitleCard>{'Dress code'}</TitleCard>
+          <StyledImg src={'./assets/dress.jpeg'} alt="Description of image" />
+          <TitleFormal>{'Formal'}</TitleFormal>
           <Description>
-            Vestido o traje semiformal (<StrikeThrough>No blanco</StrikeThrough>)
+            {'¡Preparense para una boda llena de colores! Dejemos el blanco para la novia.'}
           </Description>
-          <ContainerBox>
-            {colorsWomen.map((color, index) => (
-              <BoxContainer key={index} style={{ backgroundColor: color }} />
-            ))}
-          </ContainerBox>
-          <StyledImg src={'./assets/dress.png'} alt="Description of image" />
         </CardContainer>
       </CenteredContainer>
-      <CenteredContainer>
+      {/* <CenteredContainer>
         <CardContainer>
           <TitleCard>{'Codigo de vestimenta masculino 🎩'}</TitleCard>
           <Description>{'Hombres'}</Description>
@@ -233,19 +236,20 @@ export default function Share({ data }: ShareProps) {
           </ContainerBox>
           <StyledImg src={'./assets/traje.png'} alt="Description of image" />
         </CardContainer>
-      </CenteredContainer>
+      </CenteredContainer> */}
       <CenteredContainer>
         <CardContainer>
-          <TitleCard>{'NO niños 🚼'}</TitleCard>
-          <Description>{'Relajate, es sin niños, invitación solo para adultos'}</Description>
-          <StyledImg src={'./assets/not-kids.webp'} alt="Description of image" />
+          <TitleCard>{'Lluvia de sobres'}</TitleCard>
+          <StyledImg src={'./assets/letter.png'} alt="Description of image" />
+          <Description>{'Si deseas regalarnos algo mas que tu hermosa presencia...'}</Description>
+          {/* <Button>{'Ver mas'}</Button> */}
         </CardContainer>
       </CenteredContainer>
       <CenteredContainer style={{ marginBottom: '100px' }}>
         <CardContainer>
-          <TitleCard>{'Regalos 🎁'}</TitleCard>
-          <Description>{'Si deseas regalarnos algo mas que tu hermosa presencia...'}</Description>
-          <Button>{'Ver mas'}</Button>
+          <TitleCard>{'No niños'}</TitleCard>
+          <Description>{'Aunque nos gustan los niños, esta será una celebración sólo para adultos.'}</Description>
+          <StyledImg src={'./assets/love.jpeg'} alt="Description of image" />
         </CardContainer>
       </CenteredContainer>
     </Wrapper>
