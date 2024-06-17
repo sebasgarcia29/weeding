@@ -54,7 +54,8 @@ const BigAmpersand = styled("p", {
   position: "absolute",
   top: "50%",
   left: "50%",
-  transform: "translate(-50%, -50%)", // Center the ampersand
+  transform: "translate(-50%, -50%)",
+  fontFamily: "Bartender",
 });
 
 const ContainerQuote = styled("div", {

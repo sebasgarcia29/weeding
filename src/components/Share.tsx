@@ -5,12 +5,9 @@ import { Divider } from "antd";
 import Swal from 'sweetalert2'
 import { sendDataFirebase } from "@/service/sendInformation";
 import ICON from '../../public/assets/music.json';
-import NoStrollerIcon from '@mui/icons-material/NoStroller';
-import CheckroomIcon from '@mui/icons-material/Checkroom';
 
 const Wrapper = styled("div", {
   background: "#efebe9",
-  backgroundImage: "url(./assets/GroovePaper.png)",
   width: "100%",
   paddingBottom: 42,
   textAlign: "center",

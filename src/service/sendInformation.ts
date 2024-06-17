@@ -84,3 +84,19 @@ export async function getServerSideProps(id: string) {
         },
     };
 }
+
+export const getAllGuests = async () => {
+    const dbRef = ref(db, 'invites');
+    const snapshot = await get(dbRef);
+    if (!snapshot.exists()) {
+        return {
+            notFound: true,
+        };
+    }
+    const invites = snapshot.val();
+    return {
+        props: {
+            invites,
+        },
+    };
+}

@@ -4,6 +4,7 @@ import { handleAgendarClick, sendLocation } from '@/utils/utils';
 import Swal from 'sweetalert2';
 import { confirmOrRejectAssistance, getServerSideProps, sendDataGuestsFirebase } from '@/service/sendInformation';
 import { useRouter } from 'next/router';
+import { IanciliaryFiles } from '@/interfaces/guest';
 
 const Container = styled("div", {
     display: 'flex',
@@ -68,6 +69,7 @@ const ContainerLink = styled("div", {
 type GrettingProps = {
     data: Data;
     className?: string;
+    inviteData?: IanciliaryFiles;
 };
 
 {/* 
@@ -80,45 +82,10 @@ type GrettingProps = {
 </select>
 </div> */}
 
-enum Status {
-    CONFIRMED = 'confirmed',
-    PENDING = 'pending',
-    REJECTED = 'rejected'
-}
-
-interface IInvites {
-    numberOfGuests: number;
-    invitados: string[];
-    status: Status;
-    phoneNumber: string;
-}
-
-const Links = ({ data, className }: GrettingProps) => {
+const Links = ({ data, className, inviteData }: GrettingProps) => {
 
 
-    const router = useRouter();
-    const { id } = router.query;
-    const [inviteData, setInviteData] = React.useState<IInvites>();
-
-    React.useEffect(() => {
-        if (id?.length ?? 0 > 0) {
-            getServerSideProps(id?.toString() ?? '').then((res) => {
-                const response = res.props?.inviteData;
-                const parseData = {
-                    numberOfGuests: response.invitados.length,
-                    invitados: response.invitados,
-                    status: response.status,
-                    phoneNumber: response.telefono
-                }
-                setInviteData(parseData)
-            }).catch((err) => {
-                console.log('error in getServerSideProps>>>>')
-            })
-        }
-
-    }, [id])
-
-
+    console.log(inviteData)
 
     const handleConfirmAssistance = async () => {
         const invitees = inviteData?.invitados || [];
@@ -126,7 +93,7 @@ const Links = ({ data, className }: GrettingProps) => {
         const htmlContent = invitees.map((invitee, index) => `
             <div class="row" style="display: flex; align-items: center; margin-bottom: 10px;">
                 <label for="attendance-${index}" style="flex-basis: 50%;">${invitee}</label>
-                <select id="attendance-${index}" class="swal2-input" style="flex-basis: 50%;">
+                <select id="attendance-${index}" class="swal2-input custom-select" style="flex-basis: 50%;">
                     <option value="accepted">¡Confirmo! 🤩</option>
                     <option value="rejected">Lo siento, no puedo 🥺</option>
                 </select>
@@ -141,6 +108,9 @@ const Links = ({ data, className }: GrettingProps) => {
             confirmButtonText: "Enviar",
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#CA8D76",
+            customClass: {
+                container: className,
+            },
             preConfirm: () => {
                 const results = invitees.map((_, index) => {
                     const attendanceElement = document.getElementById(`attendance-${index}`) as HTMLInputElement;
@@ -154,6 +124,7 @@ const Links = ({ data, className }: GrettingProps) => {
         });
 
         if (formValues) {
+            console.log(formValues)
             formValues.forEach(async (guest: any) => {
                 confirmOrRejectAssistance({
                     nameGuest: guest.name,
@@ -163,7 +134,7 @@ const Links = ({ data, className }: GrettingProps) => {
             sendDataGuestsFirebase({
                 status: formValues[0].attendance === 'accepted',
                 confirmados: formValues
-            }, id?.toString() ?? '').then((res) => {
+            }, inviteData?.key?.toString() ?? '').then((res) => {
                 Swal.fire({
                     title: '¡Gracias por tu respuesta!',
                     text: '¡Te esperamos el 21 de septiembre!',
