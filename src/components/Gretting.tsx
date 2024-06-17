@@ -24,11 +24,11 @@ const ContainerDate = styled("div", {});
 const DateText = styled("p", {
   width: "100%",
   fontSize: "3.5vh",
-  fontFamily: "FF Clifford Eighteen Regular, serif",
   borderTop: "2px solid black",
   borderBottom: "2px solid black",
   color: "#86604B",
   borderColor: "#86604B",
+  textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const ContainerLabels = styled("div", {
@@ -41,15 +41,14 @@ const ContainerLabels = styled("div", {
 
 const BigLabel = styled("p", {
   fontSize: "7.5vh",
-  fontFamily: "Playfair Display, serif",
   margin: "0",
   color: "#86604B",
   zIndex: 1, // Ensure text appears above the ampersand
+  textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const BigAmpersand = styled("p", {
   fontSize: "35vh",
-  fontFamily: "Montserrat, sans-serif",
   margin: "0",
   color: "rgba(134, 96, 75, 0.2)",
   position: "absolute",
@@ -77,7 +76,6 @@ const QuoteIcon = styled(FontAwesomeIcon, {
 
 const TextInsideQuote = styled("p", {
   fontSize: "2.5vh",
-  fontFamily: "Open Sans", // O puedes usar "Open Sans, sans-serif"
   color: "#86604B",
 });
 
@@ -87,28 +85,32 @@ const MarginTop = styled("div", {
 
 type GrettingProps = {
   data?: Data;
+  className?: string;
 };
 
-export default function Gretting({ data }: GrettingProps) {
+export default function Gretting({ data, className }: GrettingProps) {
   return (
-    <Wrapper id="container-greeting" className="animate__animated animate__bounce">
-      <Container>
-        <ContainerDate>
-          <DateText>{data?.date}</DateText>
-        </ContainerDate>
-        <ContainerLabels>
-          <BigLabel>{data?.groom.name.toUpperCase()}</BigLabel>
-          <BigAmpersand>{'&'}</BigAmpersand>
-          <BigLabel>{data?.bride.name.toUpperCase()}</BigLabel>
-        </ContainerLabels>
-      </Container>
+    <div className={className}>
+      <Wrapper id="container-greeting" className="animate__animated animate__bounce">
+        <Container>
+          <ContainerDate>
+            <DateText>{data?.date}</DateText>
+          </ContainerDate>
+          <ContainerLabels>
+            <BigLabel>{data?.groom.name.toUpperCase()}</BigLabel>
+            <BigAmpersand>{'&'}</BigAmpersand>
+            <BigLabel>{data?.bride.name.toUpperCase()}</BigLabel>
+          </ContainerLabels>
+        </Container>
 
-      <ContainerQuote>
-        <QuoteIcon icon={faQuoteLeft} />
-        <TextInsideQuote>{'El amor es irracional; cuanto más quieres a alguien, menos lógica tiene todo'}</TextInsideQuote>
-        <QuoteIcon icon={faQuoteRight} />
-      </ContainerQuote>
-      <MarginTop />
-    </Wrapper>
+        <ContainerQuote>
+          <QuoteIcon icon={faQuoteLeft} />
+          <TextInsideQuote>{'El amor es irracional; cuanto más quieres a alguien, menos lógica tiene todo'}</TextInsideQuote>
+          <QuoteIcon icon={faQuoteRight} />
+        </ContainerQuote>
+        <MarginTop />
+      </Wrapper>
+    </div>
+
   );
 }

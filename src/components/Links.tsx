@@ -27,33 +27,32 @@ const ContainerTitle = styled("div", {
 
 const BigLabel = styled("p", {
     fontSize: "5vh",
-    fontFamily: "Playfair Display, serif",
     color: "#fff",
+    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const Label = styled("p", {
     fontSize: "4vh",
-    fontFamily: "Arial, serif",
     fontWeight: 'bold',
     color: "#86604B",
 });
 
 const Description = styled("p", {
     fontSize: "2.5vh",
-    fontFamily: "Playfair Display, serif",
-    color: "rgba(134, 96, 75, 0.8)",
+    color: "#80624E",
+    textShadow: "0px 1px 1px rgba(0,0,0,0.7)",
 });
 
 const Button = styled("button", {
-    fontSize: "2vh",
-    backgroundColor: "#CA8D76",
-    color: "#fff",
+    backgroundColor: "#C18171",
+    color: "white",
     padding: "10px 20px",
-    borderRadius: "5px",
     border: "none",
+    borderRadius: "25px", // Ajusta este valor para cambiar la forma del botón
     cursor: "pointer",
-    marginTop: "10px",
-    width: '70%',
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)", // Agrega sombra al botón
+    fontSize: "2.5vh",
+    fontFamily: "inherit",
 });
 
 const ContainerLink = styled("div", {
@@ -68,6 +67,7 @@ const ContainerLink = styled("div", {
 
 type GrettingProps = {
     data: Data;
+    className?: string;
 };
 
 {/* 
@@ -93,7 +93,7 @@ interface IInvites {
     phoneNumber: string;
 }
 
-const Links = ({ data }: GrettingProps) => {
+const Links = ({ data, className }: GrettingProps) => {
 
 
     const router = useRouter();
@@ -183,19 +183,20 @@ const Links = ({ data }: GrettingProps) => {
 
 
     return (
-        <Container>
-            <ContainerTitle>
-                <BigLabel>{'Ceremonia 💍'}</BigLabel>
-            </ContainerTitle>
-            <ContainerLink>
-                <Label>{String('día 🗓️').toUpperCase()}</Label>
-                <Description>{'Sábado 21 de Septiembre de 2024, 5PM'}</Description>
-                <Button onClick={handleAgendarClick}>{'Agendar'}</Button>
-            </ContainerLink>
-            <ContainerLink>
-                <Label>{String('lugar 🏡').toUpperCase()}</Label>
-                <Description>{'Intiraimi | Salón de Eventos'}</Description>
-                {/* <Button style={{ backgroundColor: '#F9A88B' }}
+        <div className={className}>
+            <Container>
+                <ContainerTitle>
+                    <BigLabel>{'Ceremonia'}</BigLabel>
+                </ContainerTitle>
+                <ContainerLink>
+                    <Label>{String('día').toUpperCase()}</Label>
+                    <Description>{'Sábado 21 de Septiembre de 2024, 5PM'}</Description>
+                    <Button onClick={handleAgendarClick}>{'Agendar'}</Button>
+                </ContainerLink>
+                <ContainerLink>
+                    <Label>{String('lugar').toUpperCase()}</Label>
+                    <Description>{'Intiraimi | Salón de Eventos'}</Description>
+                    {/* <Button style={{ backgroundColor: '#F9A88B' }}
                     onClick={() => {
                         ConfirmAssistance(data.url_whatsapp_novia)
                     }}>{'Confirmar Asistencia novía 👰🏽‍♀️'}</Button>
@@ -203,18 +204,19 @@ const Links = ({ data }: GrettingProps) => {
                     onClick={() => {
                         ConfirmAssistance(data.url_whatsapp_novio)
                     }}>{'Confirmar Asistencia novío 🤵🏽'}</Button> */}
-                <Button onClick={handleConfirmAssistance}>
-                    {'¡Confirmar Asistencia!'}
-                </Button>
-            </ContainerLink>
-            <ContainerLink>
-                <Label>{String('Dirección 📍').toUpperCase()}</Label>
-                <Description>{'Km 1, Vía Cali - Puerto Tejada, Cali, Valle del Cauca'}</Description>
-                <Button onClick={() => {
-                    sendLocation(data.url_location)
-                }}>{'¿Como llegar?'}</Button>
-            </ContainerLink>
-        </Container>
+                    <Button onClick={handleConfirmAssistance}>
+                        {'¡Confirmar Asistencia!'}
+                    </Button>
+                </ContainerLink>
+                <ContainerLink>
+                    <Label>{String('Dirección').toUpperCase()}</Label>
+                    <Description>{'Km 1, Vía Cali - Puerto Tejada, Cali, Valle del Cauca'}</Description>
+                    <Button onClick={() => {
+                        sendLocation(data.url_location)
+                    }}>{'¿Como llegar?'}</Button>
+                </ContainerLink>
+            </Container>
+        </div>
     )
 }
 

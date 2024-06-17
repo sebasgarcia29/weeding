@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import ImageGallery from "react-image-gallery";
 import { Divider } from "antd";
 import { styled } from "@stitches/react";
@@ -10,7 +11,6 @@ const Wrapper = styled("div", {
 
 const Title = styled("p", {
   fontSize: "4vh",
-  fontFamily: "Playfair Display, serif",
   fontWeight: "bold",
   color: "#86604B",
   textAlign: "center",
@@ -28,7 +28,6 @@ const Container = styled("div", {
 
 const Description = styled("p", {
   fontSize: "2.5vh",
-  fontFamily: "Playfair Display, serif",
   fontWeight: "bold",
   color: "#86604B",
   textAlign: "center",
@@ -37,32 +36,35 @@ const Description = styled("p", {
 
 const images = [
   {
-    original: "./assets/Gallery_Photo_1.png",
-    thumbnail: "./assets/Gallery_Photo_1.png",
+    original: "./assets/Gallery_Photo_01.png",
+    thumbnail: "./assets/Gallery_Photo_01.png",
   },
   {
-    original: "./assets/Gallery_Photo_2.png",
-    thumbnail: "./assets/Gallery_Photo_2.png",
+    original: "./assets/Gallery_Photo_02.png",
+    thumbnail: "./assets/Gallery_Photo_02.png",
   },
   {
-    original: "./assets/Gallery_Photo_3.png",
-    thumbnail: "./assets/Gallery_Photo_3.png",
+    original: "./assets/Gallery_Photo_03.png",
+    thumbnail: "./assets/Gallery_Photo_03.png",
   },
   {
-    original: "./assets/Gallery_Photo_4.png",
-    thumbnail: "./assets/Gallery_Photo_4.png",
+    original: "./assets/Gallery_Photo_04.png",
+    thumbnail: "./assets/Gallery_Photo_04.png",
   },
   {
-    original: "./assets/Gallery_Photo_5.png",
-    thumbnail: "./assets/Gallery_Photo_5.png",
-  },
-  {
-    original: "./assets/Gallery_Photo_6.png",
-    thumbnail: "./assets/Gallery_Photo_6.png",
+    original: "./assets/Gallery_Photo_05.png",
+    thumbnail: "./assets/Gallery_Photo_05.png",
   },
 ];
 
-export default function Gallery() {
+interface Props {
+  data?: Data;
+  className?: string;
+}
+
+export default function Gallery(props: Props) {
+
+  const { className } = props;
 
   const renderCustomItem = (item: any) => {
     return (
@@ -75,21 +77,23 @@ export default function Gallery() {
   };
 
   return (
-    <Wrapper>
-      <Container style={{ paddingLeft: "0.5em", paddingRight: '0.5em', paddingBottom: '1em' }}>
-        <Title>{String('Retratos de nuestro amor').toUpperCase()}</Title>
-      </Container>
-      <Container style={{ padding: '20px', paddingLeft: '4em', paddingRight: '4em', backgroundColor: 'white' }}>
-        <Description>{'Un minuto, un segundo, un instante que queda en la eternidad'}</Description>
-      </Container>
-      <ImageGallery
-        // infinite
-        // autoPlay
-        showPlayButton={false}
-        showFullscreenButton={false}
-        items={images}
-        renderItem={renderCustomItem} // Custom render function
-      />
-    </Wrapper>
+    <div className={className}>
+      <Wrapper>
+        <Container style={{ paddingLeft: "0.5em", paddingRight: '0.5em', paddingBottom: '1em' }}>
+          <Title>{String('Retratos de nuestro amor').toUpperCase()}</Title>
+        </Container>
+        <Container style={{ padding: '20px', paddingLeft: '4em', paddingRight: '4em', backgroundColor: 'white' }}>
+          <Description>{'Un minuto, un segundo, un instante que queda en la eternidad'}</Description>
+        </Container>
+        <ImageGallery
+          // infinite
+          // autoPlay
+          showPlayButton={false}
+          showFullscreenButton={false}
+          items={images}
+          renderItem={renderCustomItem} // Custom render function
+        />
+      </Wrapper>
+    </div>
   );
 }
