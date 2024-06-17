@@ -105,9 +105,7 @@ export default function Gretting({ data, className }: GrettingProps) {
         </Container>
 
         <ContainerQuote>
-          <QuoteIcon icon={faQuoteLeft} />
           <TextInsideQuote>{'El amor es irracional; cuanto más quieres a alguien, menos lógica tiene todo'}</TextInsideQuote>
-          <QuoteIcon icon={faQuoteRight} />
         </ContainerQuote>
         <MarginTop />
       </Wrapper>

@@ -35,10 +35,10 @@ const Description = styled("p", {
 });
 
 const images = [
-  {
-    original: "./assets/Gallery_Photo_01.png",
-    thumbnail: "./assets/Gallery_Photo_01.png",
-  },
+  // {
+  //   original: "./assets/Gallery_Photo_01.png",
+  //   thumbnail: "./assets/Gallery_Photo_01.png",
+  // },
   {
     original: "./assets/Gallery_Photo_02.png",
     thumbnail: "./assets/Gallery_Photo_02.png",
