@@ -34,24 +34,23 @@ const CenteredCapsule = styled('div', {
 
 const Text = styled("p", {
     fontSize: "6vh",
-    fontFamily: "Roboto, sans-serif",
     color: "#86604B",
     fontWeight: 'bold',
     margin: 0, // Set margin to 0 to ensure the text is centered
+    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const TextDescription = styled("p", {
     fontSize: "2.5vh",
     color: "#86604B",
-    fontFamily: "Open Sans",
     margin: 0, // Set margin to 0 to ensure the text is centered
 });
 
 
 const BigLabel = styled("p", {
     fontSize: "6vh",
-    fontFamily: "Playfair Display, serif",
     color: "#86604B",
+    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const Icon = styled("span", {
@@ -67,9 +66,10 @@ interface TimeLeft {
 
 type GrettingProps = {
     data: Data;
+    className?: string;
 };
 
-const CountdownTimer = ({ }: GrettingProps) => {
+const CountdownTimer = ({ className }: GrettingProps) => {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
 
     useEffect(() => {
@@ -100,31 +100,34 @@ const CountdownTimer = ({ }: GrettingProps) => {
     const { days, hours, minutes, seconds } = timeLeft;
 
     return (
-        <Container>
-            <BigLabel>
-                {'Falta'} <Icon>⏳</Icon>
-            </BigLabel>
+        <div className={className}>
 
-            <ContainerTime>
-                <CenteredCapsule style={{ borderLeftStyle: false ? 'solid' : 'none' }}>
-                    <Text>{days}</Text>
-                    <TextDescription>días</TextDescription>
-                </CenteredCapsule>
-                <CenteredCapsule>
-                    <Text>{hours}</Text>
-                    <TextDescription>horas</TextDescription>
-                </CenteredCapsule>
-                <CenteredCapsule>
-                    <Text>{minutes}</Text>
-                    <TextDescription>minutos</TextDescription>
-                </CenteredCapsule>
-                <CenteredCapsule style={{ borderRightStyle: false ? 'solid' : 'none' }}>
-                    <Text>{seconds}</Text>
-                    <TextDescription>segundos</TextDescription>
-                </CenteredCapsule>
-            </ContainerTime>
+            <Container>
+                <BigLabel>
+                    {'Faltan'} <Icon>⏳</Icon>
+                </BigLabel>
 
-        </Container>
+
+                <ContainerTime>
+                    <CenteredCapsule style={{ borderLeftStyle: false ? 'solid' : 'none' }}>
+                        <Text>{days}</Text>
+                        <TextDescription>días</TextDescription>
+                    </CenteredCapsule>
+                    <CenteredCapsule>
+                        <Text>{hours}</Text>
+                        <TextDescription>horas</TextDescription>
+                    </CenteredCapsule>
+                    <CenteredCapsule>
+                        <Text>{minutes}</Text>
+                        <TextDescription>minutos</TextDescription>
+                    </CenteredCapsule>
+                    <CenteredCapsule style={{ borderRightStyle: false ? 'solid' : 'none' }}>
+                        <Text>{seconds}</Text>
+                        <TextDescription>segundos</TextDescription>
+                    </CenteredCapsule>
+                </ContainerTime>
+            </Container>
+        </div>
     );
 };
 

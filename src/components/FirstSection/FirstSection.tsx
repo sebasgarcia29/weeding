@@ -5,9 +5,10 @@ import { capitalizeFirstLetter } from '@/utils/utils';
 
 type TitleProps = {
   data?: Data;
+  className?: string;
 };
 
-export default function FirstSection({ data }: TitleProps) {
+export default function FirstSection({ className }: TitleProps) {
 
   const router = useRouter();
   const { name } = router.query;
@@ -55,26 +56,28 @@ export default function FirstSection({ data }: TitleProps) {
   };
 
   return (
-    <Layout>
-      <VideoBackground autoPlay loop muted playsInline>
-        <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
-      </VideoBackground>
-      <TitleWrapper>
-        <TitleGuest>{`¡Hola ${nameParam}!`}</TitleGuest>
-        <WeddingInvitation>{`¡Nos casamos! ✨`}</WeddingInvitation>
-        {/* <GroomBride>
+    <div className={className}>
+      <Layout>
+        <VideoBackground autoPlay loop muted playsInline>
+          <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
+        </VideoBackground>
+        <TitleWrapper>
+          <TitleGuest>{`¡Hola ${nameParam}!`}</TitleGuest>
+          <WeddingInvitation>{`¡Nos casamos! ✨`}</WeddingInvitation>
+          {/* <GroomBride>
           {data?.groom?.name} &#38; {data?.bride?.name}
         </GroomBride> */}
-      </TitleWrapper>
-      <TitleMusic>
-        <TextMusic>
-          {'La música de fondo es parte de la experiencia'}
-        </TextMusic>
-        <StyledButton className="button-hover" onClick={handleScroll}>
-          {'Continuar'}
-        </StyledButton>
+        </TitleWrapper>
+        <TitleMusic>
+          <TextMusic>
+            {'La música de fondo es parte de la experiencia'}
+          </TextMusic>
+          <StyledButton className="button-hover" onClick={handleScroll}>
+            {'Continuar'}
+          </StyledButton>
 
-      </TitleMusic>
-    </Layout>
+        </TitleMusic>
+      </Layout>
+    </div>
   );
 }

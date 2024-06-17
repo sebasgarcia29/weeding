@@ -47,8 +47,6 @@ const WeddingInvitation = styled("p", {
     opacity: 0.6,
     marginBottom: 16,
     color: "white",
-    // fontFamily: "Dancing Script, cursive",
-    fontFamily: "Playfair Display, serif",
     fontWeight: "bold",
     textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
@@ -58,8 +56,6 @@ const TitleGuest = styled("p", {
     opacity: 0.6,
     marginBottom: 16,
     color: "white",
-    // fontFamily: "Dancing Script, cursive",
-    fontFamily: "Playfair Display, serif",
     fontWeight: "bold",
     textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
@@ -68,7 +64,6 @@ const GroomBride = styled("p", {
     fontSize: "5.5vh",
     opacity: 0.9,
     marginBottom: 16,
-    fontFamily: "Stay Classy Serif, serif",
 });
 
 const TextMusic = styled("p", {
@@ -76,9 +71,6 @@ const TextMusic = styled("p", {
     fontWeight: "bold",
     opacity: 0.9,
     marginBottom: 16,
-    // fontFamily: "Dancing Script, cursive",
-    // fontFamily: "Playfair Display, cursive",
-    fontFamily: "Playfair Display, serif",
     color: "white",
     textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
@@ -92,7 +84,7 @@ const StyledButton = styled("button", {
     cursor: "pointer",
     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)", // Agrega sombra al botón
     fontSize: "2.5vh",
-    fontFamily: "Roboto, sans-serif",
+    fontFamily: "inherit",
 });
 
 const StyledComponents = {

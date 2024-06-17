@@ -24,9 +24,9 @@ const Title = styled("p", {
 
 const TextInsideQuote = styled("p", {
   fontSize: "3vh",
-  fontFamily: "Open Sans", // O puedes usar "Open Sans, sans-serif"
   color: "#86604B",
   padding: "0 2rem",
+  textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
 });
 
 const CenteredContainer = styled("div", {
@@ -49,24 +49,22 @@ const TitleCard = styled("h2", {
   marginBottom: "10px",
   textAlign: "center",
   color: "#C98D7A",
-  fontWeight: "bold", // Cambiar el peso de la fuente a bold
-  fontFamily: "Roboto, sans-serif", // Usar la fuente Roboto
+  fontWeight: "bold",
 });
 
 const Icon = styled("div", {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  width: "100%", // Ensure the icon container takes full width
-  height: "100%", // Ensure the icon container takes full height
+  width: "100%",
+  height: "100%",
 });
 
 const Description = styled("p", {
   fontSize: "16px",
   textAlign: "center",
   color: '#847870',
-  fontWeight: "normal", // Reset font weight to normal
-  fontFamily: "Roboto, sans-serif", // Use Roboto font
+  fontWeight: "bold",
 });
 
 const TitleFormal = styled("p", {
@@ -74,19 +72,18 @@ const TitleFormal = styled("p", {
   textAlign: "center",
   color: '#847870',
   fontWeight: "normal",
-  fontFamily: "myElegantFont, sans-serif",
 });
 
 const Button = styled("button", {
-  backgroundColor: "#C98D7A",
-  color: "#fff",
-  border: "none",
-  borderRadius: "25px",
+  backgroundColor: "#C18171",
+  color: "white",
   padding: "10px 20px",
-  fontSize: "16px",
+  border: "none",
+  borderRadius: "25px", // Ajusta este valor para cambiar la forma del botón
   cursor: "pointer",
-  display: "block",
-  margin: "20px auto 0",
+  boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)", // Agrega sombra al botón
+  fontSize: "2.5vh",
+  fontFamily: "inherit",
 });
 
 const ContainerBox = styled('div', {
@@ -118,9 +115,10 @@ const StrikeThrough = styled("span", {
 
 type ShareProps = {
   data?: Data;
+  className?: string;
 };
 
-export default function Share({ data }: ShareProps) {
+export default function Share({ className }: ShareProps) {
   const playerRef = useRef<Player>(null);
 
   useEffect(() => {
@@ -128,19 +126,21 @@ export default function Share({ data }: ShareProps) {
   }, [])
 
   const onAddSong = async () => {
-    const styleInputs = 'class="swal2-input" style="font-size: 14px; width: calc(100% - 20px); margin: 5px 10px;"'
+    const styleInputs = 'class="swal2-input" style="font-size: 14px; width: calc(80% - 20px); margin: 5px 10px;"'
     const { value: formValues } = await Swal.fire({
       title: 'Sugerir canción',
       html: `
-        <input id="name" placeholder="Tu nombre" ${styleInputs}>
-        <input id="nameSong" placeholder="Nombre de canción o autor" ${styleInputs}>
-        <input id="linkSong" placeholder="Si lo desea ingrese el link de Youtube, Spotify, etc"${styleInputs}>
+          <div class="${className}">
+            <input id="name" class="${className}" placeholder="Tu nombre" ${styleInputs}>
+            <input id="nameSong" class="${className}" placeholder="Nombre de canción o autor" ${styleInputs}>
+            <input id="linkSong" class="${className}" placeholder="Si lo desea ingrese el link de Youtube, Spotify, etc" ${styleInputs}>
+          </div>
       `,
       confirmButtonText: 'Enviar',
       confirmButtonColor: '#C98D7A',
       focusConfirm: true,
       customClass: {
-        container: 'swal-container',
+        container: className,
         popup: 'swal-popup',
         confirmButton: 'swal-confirm-button',
         input: 'swal-input', // Custom class for the input fields
@@ -194,37 +194,38 @@ export default function Share({ data }: ShareProps) {
   const colorsWomen = ['#A56947', '#05090C', '#DCCCC3', '#7B2929', '#323C1B'];
 
   return (
-    <Wrapper>
-      <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
-        <Title>{'Fiesta'}</Title>
-      </Divider>
-      <TextInsideQuote>{'Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta'}</TextInsideQuote>
-      <CenteredContainer>
-        <CardContainer>
-          <TitleCard>{'Música'}</TitleCard>
-          <Icon>
-            <Player
-              ref={playerRef}
-              icon={ICON}
-              size={100}
-              onComplete={() => playerRef.current?.playFromBeginning()}
-            />
-          </Icon>
-          <Description>{'¿Cuál es la canción que no debe faltar en la playlist de la fiesta?'}</Description>
-          <Button onClick={onAddSong}>{'Sugerir canción'}</Button>
-        </CardContainer>
-      </CenteredContainer>
-      <CenteredContainer>
-        <CardContainer>
-          <TitleCard>{'Dress code'}</TitleCard>
-          <StyledImg src={'./assets/dress.jpeg'} alt="Description of image" />
-          <TitleFormal>{'Formal'}</TitleFormal>
-          <Description>
-            {'¡Preparense para una boda llena de colores! Dejemos el blanco para la novia.'}
-          </Description>
-        </CardContainer>
-      </CenteredContainer>
-      {/* <CenteredContainer>
+    <div className={className}>
+      <Wrapper>
+        <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
+          <Title>{'Fiesta'}</Title>
+        </Divider>
+        <TextInsideQuote>{'Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta'}</TextInsideQuote>
+        <CenteredContainer>
+          <CardContainer>
+            <TitleCard>{'Música'}</TitleCard>
+            <Icon>
+              <Player
+                ref={playerRef}
+                icon={ICON}
+                size={100}
+                onComplete={() => playerRef.current?.playFromBeginning()}
+              />
+            </Icon>
+            <Description>{'¿Cuál es la canción que no debe faltar en la playlist de la fiesta?'}</Description>
+            <Button onClick={onAddSong}>{'Sugerir canción'}</Button>
+          </CardContainer>
+        </CenteredContainer>
+        <CenteredContainer>
+          <CardContainer>
+            <TitleCard>{'Dress code'}</TitleCard>
+            <StyledImg src={'./assets/dress.jpeg'} alt="Description of image" />
+            <TitleFormal>{'Formal'}</TitleFormal>
+            <Description>
+              {'¡Preparense para una boda llena de colores! Dejemos el blanco para la novia.'}
+            </Description>
+          </CardContainer>
+        </CenteredContainer>
+        {/* <CenteredContainer>
         <CardContainer>
           <TitleCard>{'Codigo de vestimenta masculino 🎩'}</TitleCard>
           <Description>{'Hombres'}</Description>
@@ -237,21 +238,22 @@ export default function Share({ data }: ShareProps) {
           <StyledImg src={'./assets/traje.png'} alt="Description of image" />
         </CardContainer>
       </CenteredContainer> */}
-      <CenteredContainer>
-        <CardContainer>
-          <TitleCard>{'Lluvia de sobres'}</TitleCard>
-          <StyledImg src={'./assets/letter.png'} alt="Description of image" />
-          <Description>{'Si deseas regalarnos algo mas que tu hermosa presencia...'}</Description>
-          {/* <Button>{'Ver mas'}</Button> */}
-        </CardContainer>
-      </CenteredContainer>
-      <CenteredContainer style={{ marginBottom: '100px' }}>
-        <CardContainer>
-          <TitleCard>{'No niños'}</TitleCard>
-          <Description>{'Aunque nos gustan los niños, esta será una celebración sólo para adultos.'}</Description>
-          <StyledImg src={'./assets/love.jpeg'} alt="Description of image" />
-        </CardContainer>
-      </CenteredContainer>
-    </Wrapper>
+        <CenteredContainer>
+          <CardContainer>
+            <TitleCard>{'Lluvia de sobres'}</TitleCard>
+            <StyledImg src={'./assets/letter.png'} alt="Description of image" />
+            <Description>{'Si deseas regalarnos algo mas que tu hermosa presencia...'}</Description>
+            {/* <Button>{'Ver mas'}</Button> */}
+          </CardContainer>
+        </CenteredContainer>
+        <CenteredContainer style={{ marginBottom: '100px' }}>
+          <CardContainer>
+            <TitleCard>{'No niños'}</TitleCard>
+            <Description>{'Aunque nos gustan los niños, esta será una celebración sólo para adultos.'}</Description>
+            <StyledImg src={'./assets/love.jpeg'} alt="Description of image" />
+          </CardContainer>
+        </CenteredContainer>
+      </Wrapper>
+    </div>
   );
 }

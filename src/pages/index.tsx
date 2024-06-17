@@ -1,11 +1,10 @@
 import React from "react";
 import Head from "next/head";
-import { Noto_Sans_KR } from "next/font/google";
+import localFont from 'next/font/local'
 import dynamic from "next/dynamic";
 import { styled } from "@stitches/react";
 import JsonData from "@/data.json";
 import { FloatingButton } from "@/components/FloatingButton";
-import firebase from "firebase/app"; // Import firebase
 import { db } from "@/config/firebaseConfig";
 require('dotenv').config();
 
@@ -16,12 +15,6 @@ const Links = dynamic(() => import("@/components/Links"), { ssr: false });
 const Gallery = dynamic(() => import("@/components/Gallery"), { ssr: false });
 const Share = dynamic(() => import("@/components/Share"), { ssr: false });
 
-
-const notoSansKR = Noto_Sans_KR({
-  weight: ["400", "700"],
-  subsets: [],
-  style: "normal",
-});
 
 const Footer = styled("footer", {
   background: "#D7CCC8",
@@ -37,6 +30,10 @@ const Footer = styled("footer", {
   "-webkit-box-align": "center",
   "-webkit-box-pack": "center",
 });
+
+const bartenderFont = localFont({ src: '../styles/Bartender.ttf' });
+const dancingFont = localFont({ src: '../styles/Dancing.ttf' });
+const englandFont = localFont({ src: '../styles/England.ttf' });
 
 export default function Home() {
 
@@ -88,15 +85,14 @@ export default function Home() {
         />
 
       </Head>
-      <main className={`${notoSansKR.className}`}>
-        <Title data={JsonData} />
-        <Gretting data={JsonData} />
-        <Counter data={JsonData} />
-        <Links data={JsonData} />
-        <Gallery />
-        <Share />
-        <Footer>{'Eres una persona muy importante para nosotros ❤️'}</Footer>
-        {/* Floating button */}
+      <main>
+        <Title data={JsonData} className={dancingFont.className} />
+        <Gretting data={JsonData} className={dancingFont.className} />
+        <Counter data={JsonData} className={bartenderFont.className} />
+        <Links data={JsonData} className={dancingFont.className} />
+        <Gallery data={JsonData} className={dancingFont.className} />
+        <Share data={JsonData} className={dancingFont.className} />
+        <Footer className={dancingFont.className}>{'Eres una persona muy importante para nosotros ❤️'}</Footer>
         <FloatingButton />
       </main>
 
