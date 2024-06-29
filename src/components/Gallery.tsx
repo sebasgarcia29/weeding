@@ -58,10 +58,6 @@ const images = [
     original: "./assets/photo01.jpg",
     thumbnail: "./assets/photo01.jpg",
   },
-  {
-    original: "./assets/photo06.jpg",
-    thumbnail: "./assets/photo06.jpg",
-  },
 ];
 
 interface Props {
