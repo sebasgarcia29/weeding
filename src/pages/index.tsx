@@ -36,7 +36,7 @@ const Footer = styled("footer", {
 
 const bartenderFont = localFont({ src: '../styles/Bartender.ttf' });
 const dancingFont = localFont({ src: '../styles/Dancing.ttf' });
-const englandFont = localFont({ src: '../styles/England.ttf' });
+const goudyFont = localFont({ src: '../styles/goudy.otf' });
 
 export default function Home() {
   db;
@@ -102,13 +102,13 @@ export default function Home() {
 
       </Head>
       <main>
-        <Title data={JsonData} className={dancingFont.className} />
+        <Title data={JsonData} className={goudyFont.className} userInvited={userLink} />
         <Gretting data={JsonData} className={dancingFont.className} />
-        <Counter data={JsonData} className={bartenderFont.className} />
-        <Links data={JsonData} className={dancingFont.className} inviteData={userLink} />
+        <Counter data={JsonData} className={dancingFont.className} />
+        <Links data={JsonData} className={goudyFont.className} inviteData={userLink} />
         <Gallery data={JsonData} className={dancingFont.className} />
-        <Share data={JsonData} className={dancingFont.className} />
-        <Footer className={dancingFont.className}>{'Eres una persona muy importante para nosotros ❤️'}</Footer>
+        <Share data={JsonData} className={goudyFont.className} />
+        <Footer className={goudyFont.className}>{'Eres una persona muy importante para nosotros ❤️'}</Footer>
         <FloatingButton />
       </main>
 

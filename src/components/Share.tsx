@@ -17,6 +17,7 @@ const Title = styled("p", {
   fontSize: "5vh",
   fontWeight: "bold",
   color: "#86604B",
+  fontFamily: "Bartender",
 });
 
 const TextInsideQuote = styled("p", {
@@ -101,7 +102,7 @@ const BoxContainer = styled('div', {
 });
 
 const StyledImg = styled('img', {
-  width: "60%",
+  width: "50%",
   height: "auto",
 });
 
@@ -110,12 +111,12 @@ const StrikeThrough = styled("span", {
   color: "red",
 });
 
-type ShareProps = {
+interface ShareProps {
   data?: Data;
   className?: string;
 };
 
-export default function Share({ className }: ShareProps) {
+const Share = ({ className }: ShareProps) => {
   const playerRef = useRef<Player>(null);
 
   useEffect(() => {
@@ -130,7 +131,7 @@ export default function Share({ className }: ShareProps) {
           <div class="${className}">
             <input id="name" class="${className}" placeholder="Tu nombre" ${styleInputs}>
             <input id="nameSong" class="${className}" placeholder="Nombre de canción o autor" ${styleInputs}>
-            <input id="linkSong" class="${className}" placeholder="Si lo desea ingrese el link de Youtube, Spotify, etc" ${styleInputs}>
+            <input id="linkSong" class="${className}" placeholder="Si desea ingresar el enlace de YouTube, Spotify, u otra plataforma, por favor hágalo a continuación:" ${styleInputs}>
           </div>
       `,
       confirmButtonText: 'Enviar',
@@ -196,7 +197,7 @@ export default function Share({ className }: ShareProps) {
         <Divider plain style={{ marginTop: 0, marginBottom: 32 }}>
           <Title>{'Fiesta'}</Title>
         </Divider>
-        <TextInsideQuote>{'Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta'}</TextInsideQuote>
+        <TextInsideQuote>{'Hagamos juntos una fiesta épica. Aquí algunos detalles a tener en cuenta.'}</TextInsideQuote>
         <CenteredContainer>
           <CardContainer>
             <TitleCard>{'Música'}</TitleCard>
@@ -208,7 +209,7 @@ export default function Share({ className }: ShareProps) {
                 onComplete={() => playerRef.current?.playFromBeginning()}
               />
             </Icon>
-            <Description>{'¿Cuál es la canción que no debe faltar en la playlist de la fiesta?'}</Description>
+            <Description>{'¿Cuál es la canción que no debe faltar en la playlist de la fiesta?.'}</Description>
             <Button onClick={onAddSong}>{'Sugerir canción'}</Button>
           </CardContainer>
         </CenteredContainer>
@@ -239,7 +240,7 @@ export default function Share({ className }: ShareProps) {
           <CardContainer>
             <TitleCard>{'Lluvia de sobres'}</TitleCard>
             <StyledImg src={'./assets/letter.png'} alt="Description of image" />
-            <Description>{'Si deseas regalarnos algo mas que tu hermosa presencia...'}</Description>
+            <Description>{'Si deseas regalarnos algo más que tu hermosa presencia...'}</Description>
             {/* <Button>{'Ver mas'}</Button> */}
           </CardContainer>
         </CenteredContainer>
@@ -247,10 +248,12 @@ export default function Share({ className }: ShareProps) {
           <CardContainer>
             <TitleCard>{'No niños'}</TitleCard>
             <Description>{'Aunque nos gustan los niños, esta será una celebración sólo para adultos.'}</Description>
-            <StyledImg src={'./assets/love.jpeg'} alt="Description of image" />
+            <StyledImg src={'./assets/onlyAdults2.png'} alt="Description of image" />
           </CardContainer>
         </CenteredContainer>
       </Wrapper>
     </div>
   );
 }
+
+export default Share;

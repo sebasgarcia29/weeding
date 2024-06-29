@@ -45,6 +45,7 @@ const BigLabel = styled("p", {
   color: "#86604B",
   zIndex: 1, // Ensure text appears above the ampersand
   textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+  fontFamily: "Dancing",
 });
 
 const BigAmpersand = styled("p", {
@@ -76,7 +77,7 @@ const QuoteIcon = styled(FontAwesomeIcon, {
 });
 
 const TextInsideQuote = styled("p", {
-  fontSize: "2.5vh",
+  fontSize: "2rem",
   color: "#86604B",
 });
 
@@ -105,7 +106,7 @@ export default function Gretting({ data, className }: GrettingProps) {
         </Container>
 
         <ContainerQuote>
-          <TextInsideQuote>{'El amor es irracional; cuanto más quieres a alguien, menos lógica tiene todo'}</TextInsideQuote>
+          <TextInsideQuote>{'"Cuando te das cuenta de que quieres pasar el resto de tu vida con alguien, deseas que el resto de tu vida comience lo antes posible."'}</TextInsideQuote>
         </ContainerQuote>
         <MarginTop />
       </Wrapper>

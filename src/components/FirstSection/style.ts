@@ -10,7 +10,7 @@ const Layout = styled("div", {
 
 const TitleWrapper = styled("div", {
     position: "absolute",
-    width: "100%",
+    width: "90%",
     top: "35%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -43,8 +43,7 @@ const VideoBackground = styled("video", {
 });
 
 const WeddingInvitation = styled("p", {
-    fontSize: "6.0vh",
-    opacity: 0.6,
+    fontSize: "4.0vh",
     marginBottom: 16,
     color: "white",
     fontWeight: "bold",
@@ -52,8 +51,7 @@ const WeddingInvitation = styled("p", {
 });
 
 const TitleGuest = styled("p", {
-    fontSize: "4.0vh",
-    opacity: 0.6,
+    fontSize: "3.0vh",
     marginBottom: 16,
     color: "white",
     fontWeight: "bold",
@@ -72,7 +70,7 @@ const TextMusic = styled("p", {
     opacity: 0.9,
     marginBottom: 16,
     color: "white",
-    textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+    textShadow: "2px 2px 4px rgba(0,0,0,0.9)",
 });
 
 const StyledButton = styled("button", {
@@ -87,6 +85,14 @@ const StyledButton = styled("button", {
     fontFamily: "inherit",
 });
 
+const BackgroundDiv = styled('div', {
+    height: '100vh',
+    width: '100vw',
+    backgroundImage: 'url(./assets/photo02.jpg)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+});
+
 const StyledComponents = {
     Layout,
     TitleWrapper,
@@ -97,6 +103,7 @@ const StyledComponents = {
     TextMusic,
     StyledButton,
     TitleGuest,
+    BackgroundDiv,
 };
 
 export default StyledComponents;

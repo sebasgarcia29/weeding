@@ -51,6 +51,7 @@ const BigLabel = styled("p", {
     fontSize: "6vh",
     color: "#86604B",
     textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+    fontFamily: "Bartender",
 });
 
 const Icon = styled("span", {

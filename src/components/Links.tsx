@@ -2,8 +2,7 @@ import React from 'react'
 import { styled } from "@stitches/react";
 import { handleAgendarClick, sendLocation } from '@/utils/utils';
 import Swal from 'sweetalert2';
-import { confirmOrRejectAssistance, getServerSideProps, sendDataGuestsFirebase } from '@/service/sendInformation';
-import { useRouter } from 'next/router';
+import { confirmOrRejectAssistance, sendDataGuestsFirebase } from '@/service/sendInformation';
 import { IanciliaryFiles } from '@/interfaces/guest';
 
 const Container = styled("div", {
@@ -22,7 +21,6 @@ const ContainerTitle = styled("div", {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: "rgba(134, 96, 75, 0.3)",
-    // backgroundColor: 'red',
     width: '1000%',
 });
 
@@ -42,6 +40,7 @@ const Description = styled("p", {
     fontSize: "2.5vh",
     color: "#80624E",
     textShadow: "0px 1px 1px rgba(0,0,0,0.7)",
+    textAlign: 'center',
 });
 
 const Button = styled("button", {
@@ -83,9 +82,6 @@ type GrettingProps = {
 </div> */}
 
 const Links = ({ data, className, inviteData }: GrettingProps) => {
-
-
-    console.log(inviteData)
 
     const handleConfirmAssistance = async () => {
         const invitees = inviteData?.invitados || [];
@@ -157,34 +153,28 @@ const Links = ({ data, className, inviteData }: GrettingProps) => {
         <div className={className}>
             <Container>
                 <ContainerTitle>
-                    <BigLabel>{'Ceremonia'}</BigLabel>
+                    <BigLabel>{'Ceremonia civil'}</BigLabel>
                 </ContainerTitle>
                 <ContainerLink>
-                    <Label>{String('día').toUpperCase()}</Label>
+                    <Label>{'Día'}</Label>
                     <Description>{'Sábado 21 de Septiembre de 2024, 5PM'}</Description>
                     <Button onClick={handleAgendarClick}>{'Agendar'}</Button>
                 </ContainerLink>
                 <ContainerLink>
-                    <Label>{String('lugar').toUpperCase()}</Label>
-                    <Description>{'Intiraimi | Salón de Eventos'}</Description>
-                    {/* <Button style={{ backgroundColor: '#F9A88B' }}
-                    onClick={() => {
-                        ConfirmAssistance(data.url_whatsapp_novia)
-                    }}>{'Confirmar Asistencia novía 👰🏽‍♀️'}</Button>
-                <Button style={{ backgroundColor: '#98DA6C' }}
-                    onClick={() => {
-                        ConfirmAssistance(data.url_whatsapp_novio)
-                    }}>{'Confirmar Asistencia novío 🤵🏽'}</Button> */}
+                    <Label>{'Lugar'}</Label>
+                    <Description>
+                        {'Intiraimi | Salón de Eventos'}
+                    </Description>
                     <Button onClick={handleConfirmAssistance}>
-                        {'¡Confirmar Asistencia!'}
+                        {'¡Confirmar asistencia!'}
                     </Button>
                 </ContainerLink>
                 <ContainerLink>
-                    <Label>{String('Dirección').toUpperCase()}</Label>
+                    <Label>{'Dirección'}</Label>
                     <Description>{'Km 1, Vía Cali - Puerto Tejada, Cali, Valle del Cauca'}</Description>
                     <Button onClick={() => {
                         sendLocation(data.url_location)
-                    }}>{'¿Como llegar?'}</Button>
+                    }}>{'¿Cómo llegar?'}</Button>
                 </ContainerLink>
             </Container>
         </div>

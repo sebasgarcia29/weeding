@@ -1,28 +1,27 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import StyledComponents from './style';
-import { capitalizeFirstLetter } from '@/utils/utils';
+import { IanciliaryFiles } from '@/interfaces/guest';
 
 type TitleProps = {
   data?: Data;
   className?: string;
+  userInvited?: IanciliaryFiles;
 };
 
-export default function FirstSection({ className }: TitleProps) {
+export default function FirstSection({ className, userInvited }: TitleProps) {
 
-  const router = useRouter();
-  const { name } = router.query;
-
-  const [nameParam, setNameParam] = React.useState('');
-
-  React.useEffect(() => {
-    if (name) {
-      setNameParam(capitalizeFirstLetter(String(name)));
-    }
-  }, [name]);
-
-
-  const { Layout, TitleWrapper, TitleMusic, VideoBackground, WeddingInvitation, GroomBride, TextMusic, StyledButton, TitleGuest } = StyledComponents;
+  const {
+    Layout,
+    TitleWrapper,
+    TitleMusic,
+    VideoBackground,
+    WeddingInvitation,
+    GroomBride,
+    TextMusic,
+    StyledButton,
+    TitleGuest,
+    BackgroundDiv,
+  } = StyledComponents;
 
   const smoothScroll = (target: string, duration: number): void => {
     const targetElement: Element | null = document.querySelector(target);
@@ -58,12 +57,13 @@ export default function FirstSection({ className }: TitleProps) {
   return (
     <div className={className}>
       <Layout>
-        <VideoBackground autoPlay loop muted playsInline>
+        {/* <VideoBackground autoPlay loop muted playsInline>
           <source src="./assets/BackgroundVideo.mp4" type="video/mp4" />
-        </VideoBackground>
+        </VideoBackground> */}
+        <BackgroundDiv />
         <TitleWrapper>
-          <TitleGuest>{`¡Hola ${nameParam}!`}</TitleGuest>
-          <WeddingInvitation>{`¡Nos casamos! ✨`}</WeddingInvitation>
+          <TitleGuest>{`Nuestra Historia de Amor`}</TitleGuest>
+          <WeddingInvitation>{`Un día especial rodeados de quienes amamos`}</WeddingInvitation>
           {/* <GroomBride>
           {data?.groom?.name} &#38; {data?.bride?.name}
         </GroomBride> */}

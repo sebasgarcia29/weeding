@@ -6,7 +6,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 
 const Wrapper = styled("div", {
   flex: 1,
-  backgroundColor: "rgba(134, 96, 75, 0.2)",
+  backgroundColor: "#FFF",
 });
 
 const Title = styled("p", {
@@ -15,6 +15,7 @@ const Title = styled("p", {
   color: "#86604B",
   textAlign: "center",
   margin: "0",
+  fontFamily: "Dancing",
 });
 
 const Container = styled("div", {
@@ -24,6 +25,8 @@ const Container = styled("div", {
   backdropFilter: "blur(10px)",
   zIndex: 1,
   position: "relative",
+  backgroundColor: '#FFFFFF',
+  paddingTop: '2em',
 })
 
 const Description = styled("p", {
@@ -35,25 +38,29 @@ const Description = styled("p", {
 });
 
 const images = [
-  // {
-  //   original: "./assets/Gallery_Photo_01.png",
-  //   thumbnail: "./assets/Gallery_Photo_01.png",
-  // },
   {
-    original: "./assets/Gallery_Photo_02.png",
-    thumbnail: "./assets/Gallery_Photo_02.png",
+    original: "./assets/photo04.jpg",
+    thumbnail: "./assets/photo04.jpg",
   },
   {
-    original: "./assets/Gallery_Photo_03.png",
-    thumbnail: "./assets/Gallery_Photo_03.png",
+    original: "./assets/photo09.jpg",
+    thumbnail: "./assets/photo09.jpg",
   },
   {
-    original: "./assets/Gallery_Photo_04.png",
-    thumbnail: "./assets/Gallery_Photo_04.png",
+    original: "./assets/photo06.jpg",
+    thumbnail: "./assets/photo06.jpg",
   },
   {
-    original: "./assets/Gallery_Photo_05.png",
-    thumbnail: "./assets/Gallery_Photo_05.png",
+    original: "./assets/photo03.jpg",
+    thumbnail: "./assets/photo03.jpg",
+  },
+  {
+    original: "./assets/photo01.jpg",
+    thumbnail: "./assets/photo01.jpg",
+  },
+  {
+    original: "./assets/photo06.jpg",
+    thumbnail: "./assets/photo06.jpg",
   },
 ];
 
@@ -79,21 +86,21 @@ export default function Gallery(props: Props) {
   return (
     <div className={className}>
       <Wrapper>
-        <Container style={{ paddingLeft: "0.5em", paddingRight: '0.5em', paddingBottom: '1em' }}>
-          <Title>{String('Retratos de nuestro amor').toUpperCase()}</Title>
-        </Container>
-        <Container style={{ padding: '20px', paddingLeft: '4em', paddingRight: '4em', backgroundColor: 'white' }}>
-          <Description>{'Un minuto, un segundo, un instante que queda en la eternidad'}</Description>
+        <Divider style={{ backgroundColor: '#FFF' }}>
+          <Title>{'Retratos de amor'}</Title>
+        </Divider>
+        <Container style={{ padding: '20px', paddingLeft: '4em', paddingRight: '4em', backgroundColor: '#FFF' }}>
+          <Description>{'Un minuto, un segundo, un instante que queda en la eternidad.'}</Description>
         </Container>
         <ImageGallery
-          // infinite
-          // autoPlay
+          infinite
+          autoPlay
           showPlayButton={false}
           showFullscreenButton={false}
           items={images}
           renderItem={renderCustomItem} // Custom render function
         />
       </Wrapper>
-    </div>
+    </div >
   );
 }
