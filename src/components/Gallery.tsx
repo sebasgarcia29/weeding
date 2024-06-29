@@ -83,7 +83,7 @@ export default function Gallery(props: Props) {
     <div className={className}>
       <Wrapper>
         <Divider style={{ backgroundColor: '#FFF' }}>
-          <Title>{'Retratos de amor'}</Title>
+          <Title>{'Retratos de nuestro amor'}</Title>
         </Divider>
         <Container style={{ padding: '20px', paddingLeft: '4em', paddingRight: '4em', backgroundColor: '#FFF' }}>
           <Description>{'Un minuto, un segundo, un instante que queda en la eternidad.'}</Description>

@@ -169,6 +169,15 @@ const Share = ({ className }: ShareProps) => {
       },
     });
     if (formValues) {
+      if (!formValues.name || !formValues.nameSong) {
+        Swal.fire({
+          title: '¡Lo sentimos!',
+          text: 'Debes ingresar tu nombre y la canción que deseas sugerir',
+          icon: 'error',
+          confirmButtonColor: '#C98D7A',
+        });
+        return;
+      }
       sendDataFirebase(formValues)
         .then((_) => {
           Swal.fire({
